@@ -1,0 +1,509 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E9B6A8019A8467600ED156D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A7F19A8467600ED156D /* Foundation.framework */; };
+		8E9B6A8219A8467600ED156D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A8119A8467600ED156D /* CoreGraphics.framework */; };
+		8E9B6A8419A8467600ED156D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A8319A8467600ED156D /* UIKit.framework */; };
+		8E9B6A8A19A8467600ED156D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E9B6A8819A8467600ED156D /* InfoPlist.strings */; };
+		8E9B6A8C19A8467600ED156D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6A8B19A8467600ED156D /* main.m */; };
+		8E9B6A9019A8467600ED156D /* ETSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6A8F19A8467600ED156D /* ETSAppDelegate.m */; };
+		8E9B6A9219A8467600ED156D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E9B6A9119A8467600ED156D /* Images.xcassets */; };
+		8E9B6A9919A8467600ED156D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A9819A8467600ED156D /* XCTest.framework */; };
+		8E9B6A9A19A8467600ED156D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A7F19A8467600ED156D /* Foundation.framework */; };
+		8E9B6A9B19A8467600ED156D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A8319A8467600ED156D /* UIKit.framework */; };
+		8E9B6AA319A8467600ED156D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8E9B6AA119A8467600ED156D /* InfoPlist.strings */; };
+		8E9B6AA519A8467600ED156D /* EudicTransformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6AA419A8467600ED156D /* EudicTransformTests.m */; };
+		8E9B6AB719A8528D00ED156D /* ETSWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6AB619A8528D00ED156D /* ETSWord.m */; };
+		8E9B6ABA19A852DE00ED156D /* ETSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6AB919A852DE00ED156D /* ETSParser.m */; };
+		8E9B6ABD19A8D4B700ED156D /* ETSWordsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6ABC19A8D4B700ED156D /* ETSWordsListViewController.m */; };
+		8E9B6AC019A9B8C000ED156D /* ETSDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6ABF19A9B8C000ED156D /* ETSDBHelper.m */; };
+		8E9B6AC219A9B90100ED156D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6AC119A9B90100ED156D /* libsqlite3.dylib */; };
+		8E9B6AC519A9BC3400ED156D /* ETSDBTableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6AC419A9BC3400ED156D /* ETSDBTableItem.m */; };
+		8ECAD4C519AB2CDC00ACDAC6 /* myWords.html in Resources */ = {isa = PBXBuildFile; fileRef = 8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8E9B6A9C19A8467600ED156D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E9B6A7419A8467600ED156D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E9B6A7B19A8467600ED156D;
+			remoteInfo = EudicTransform;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8E9B6A7C19A8467600ED156D /* EudicTransform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EudicTransform.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E9B6A7F19A8467600ED156D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8E9B6A8119A8467600ED156D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		8E9B6A8319A8467600ED156D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8E9B6A8719A8467600ED156D /* EudicTransform-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EudicTransform-Info.plist"; sourceTree = "<group>"; };
+		8E9B6A8919A8467600ED156D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8E9B6A8B19A8467600ED156D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8E9B6A8D19A8467600ED156D /* EudicTransform-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EudicTransform-Prefix.pch"; sourceTree = "<group>"; };
+		8E9B6A8E19A8467600ED156D /* ETSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ETSAppDelegate.h; sourceTree = "<group>"; };
+		8E9B6A8F19A8467600ED156D /* ETSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ETSAppDelegate.m; sourceTree = "<group>"; };
+		8E9B6A9119A8467600ED156D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8E9B6A9719A8467600ED156D /* EudicTransformTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EudicTransformTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E9B6A9819A8467600ED156D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		8E9B6AA019A8467600ED156D /* EudicTransformTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EudicTransformTests-Info.plist"; sourceTree = "<group>"; };
+		8E9B6AA219A8467600ED156D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8E9B6AA419A8467600ED156D /* EudicTransformTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EudicTransformTests.m; sourceTree = "<group>"; };
+		8E9B6AB519A8528D00ED156D /* ETSWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSWord.h; sourceTree = "<group>"; };
+		8E9B6AB619A8528D00ED156D /* ETSWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSWord.m; sourceTree = "<group>"; };
+		8E9B6AB819A852DE00ED156D /* ETSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSParser.h; sourceTree = "<group>"; };
+		8E9B6AB919A852DE00ED156D /* ETSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSParser.m; sourceTree = "<group>"; };
+		8E9B6ABB19A8D4B700ED156D /* ETSWordsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSWordsListViewController.h; sourceTree = "<group>"; };
+		8E9B6ABC19A8D4B700ED156D /* ETSWordsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSWordsListViewController.m; sourceTree = "<group>"; };
+		8E9B6ABE19A9B8C000ED156D /* ETSDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSDBHelper.h; sourceTree = "<group>"; };
+		8E9B6ABF19A9B8C000ED156D /* ETSDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSDBHelper.m; sourceTree = "<group>"; };
+		8E9B6AC119A9B90100ED156D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		8E9B6AC319A9BC3400ED156D /* ETSDBTableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSDBTableItem.h; sourceTree = "<group>"; };
+		8E9B6AC419A9BC3400ED156D /* ETSDBTableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSDBTableItem.m; sourceTree = "<group>"; };
+		8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = myWords.html; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E9B6A7919A8467600ED156D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E9B6AC219A9B90100ED156D /* libsqlite3.dylib in Frameworks */,
+				8E9B6A8219A8467600ED156D /* CoreGraphics.framework in Frameworks */,
+				8E9B6A8419A8467600ED156D /* UIKit.framework in Frameworks */,
+				8E9B6A8019A8467600ED156D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9B6A9419A8467600ED156D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E9B6A9919A8467600ED156D /* XCTest.framework in Frameworks */,
+				8E9B6A9B19A8467600ED156D /* UIKit.framework in Frameworks */,
+				8E9B6A9A19A8467600ED156D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E9B6A7319A8467600ED156D = {
+			isa = PBXGroup;
+			children = (
+				8E9B6A8519A8467600ED156D /* EudicTransform */,
+				8E9B6A9E19A8467600ED156D /* EudicTransformTests */,
+				8E9B6A7E19A8467600ED156D /* Frameworks */,
+				8E9B6A7D19A8467600ED156D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8E9B6A7D19A8467600ED156D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E9B6A7C19A8467600ED156D /* EudicTransform.app */,
+				8E9B6A9719A8467600ED156D /* EudicTransformTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E9B6A7E19A8467600ED156D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8E9B6AC119A9B90100ED156D /* libsqlite3.dylib */,
+				8E9B6A7F19A8467600ED156D /* Foundation.framework */,
+				8E9B6A8119A8467600ED156D /* CoreGraphics.framework */,
+				8E9B6A8319A8467600ED156D /* UIKit.framework */,
+				8E9B6A9819A8467600ED156D /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8E9B6A8519A8467600ED156D /* EudicTransform */ = {
+			isa = PBXGroup;
+			children = (
+				8E9B6AB319A8520D00ED156D /* Controller */,
+				8E9B6AB419A8520D00ED156D /* Model */,
+				8E9B6A8E19A8467600ED156D /* ETSAppDelegate.h */,
+				8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */,
+				8E9B6A8F19A8467600ED156D /* ETSAppDelegate.m */,
+				8E9B6A9119A8467600ED156D /* Images.xcassets */,
+				8E9B6A8619A8467600ED156D /* Supporting Files */,
+			);
+			path = EudicTransform;
+			sourceTree = "<group>";
+		};
+		8E9B6A8619A8467600ED156D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E9B6A8719A8467600ED156D /* EudicTransform-Info.plist */,
+				8E9B6A8819A8467600ED156D /* InfoPlist.strings */,
+				8E9B6A8B19A8467600ED156D /* main.m */,
+				8E9B6A8D19A8467600ED156D /* EudicTransform-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8E9B6A9E19A8467600ED156D /* EudicTransformTests */ = {
+			isa = PBXGroup;
+			children = (
+				8E9B6AA419A8467600ED156D /* EudicTransformTests.m */,
+				8E9B6A9F19A8467600ED156D /* Supporting Files */,
+			);
+			path = EudicTransformTests;
+			sourceTree = "<group>";
+		};
+		8E9B6A9F19A8467600ED156D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8E9B6AA019A8467600ED156D /* EudicTransformTests-Info.plist */,
+				8E9B6AA119A8467600ED156D /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8E9B6AB319A8520D00ED156D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8E9B6ABB19A8D4B700ED156D /* ETSWordsListViewController.h */,
+				8E9B6ABC19A8D4B700ED156D /* ETSWordsListViewController.m */,
+				8E9B6AB819A852DE00ED156D /* ETSParser.h */,
+				8E9B6AB919A852DE00ED156D /* ETSParser.m */,
+				8E9B6ABE19A9B8C000ED156D /* ETSDBHelper.h */,
+				8E9B6ABF19A9B8C000ED156D /* ETSDBHelper.m */,
+				8E9B6AC319A9BC3400ED156D /* ETSDBTableItem.h */,
+				8E9B6AC419A9BC3400ED156D /* ETSDBTableItem.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8E9B6AB419A8520D00ED156D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E9B6AB519A8528D00ED156D /* ETSWord.h */,
+				8E9B6AB619A8528D00ED156D /* ETSWord.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E9B6A7B19A8467600ED156D /* EudicTransform */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E9B6AA819A8467600ED156D /* Build configuration list for PBXNativeTarget "EudicTransform" */;
+			buildPhases = (
+				8E9B6A7819A8467600ED156D /* Sources */,
+				8E9B6A7919A8467600ED156D /* Frameworks */,
+				8E9B6A7A19A8467600ED156D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EudicTransform;
+			productName = EudicTransform;
+			productReference = 8E9B6A7C19A8467600ED156D /* EudicTransform.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8E9B6A9619A8467600ED156D /* EudicTransformTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E9B6AAB19A8467600ED156D /* Build configuration list for PBXNativeTarget "EudicTransformTests" */;
+			buildPhases = (
+				8E9B6A9319A8467600ED156D /* Sources */,
+				8E9B6A9419A8467600ED156D /* Frameworks */,
+				8E9B6A9519A8467600ED156D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E9B6A9D19A8467600ED156D /* PBXTargetDependency */,
+			);
+			name = EudicTransformTests;
+			productName = EudicTransformTests;
+			productReference = 8E9B6A9719A8467600ED156D /* EudicTransformTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E9B6A7419A8467600ED156D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ETS;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "stone win";
+				TargetAttributes = {
+					8E9B6A9619A8467600ED156D = {
+						TestTargetID = 8E9B6A7B19A8467600ED156D;
+					};
+				};
+			};
+			buildConfigurationList = 8E9B6A7719A8467600ED156D /* Build configuration list for PBXProject "EudicTransform" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8E9B6A7319A8467600ED156D;
+			productRefGroup = 8E9B6A7D19A8467600ED156D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E9B6A7B19A8467600ED156D /* EudicTransform */,
+				8E9B6A9619A8467600ED156D /* EudicTransformTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E9B6A7A19A8467600ED156D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8ECAD4C519AB2CDC00ACDAC6 /* myWords.html in Resources */,
+				8E9B6A8A19A8467600ED156D /* InfoPlist.strings in Resources */,
+				8E9B6A9219A8467600ED156D /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9B6A9519A8467600ED156D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E9B6AA319A8467600ED156D /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E9B6A7819A8467600ED156D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E9B6AC019A9B8C000ED156D /* ETSDBHelper.m in Sources */,
+				8E9B6A8C19A8467600ED156D /* main.m in Sources */,
+				8E9B6AB719A8528D00ED156D /* ETSWord.m in Sources */,
+				8E9B6A9019A8467600ED156D /* ETSAppDelegate.m in Sources */,
+				8E9B6AC519A9BC3400ED156D /* ETSDBTableItem.m in Sources */,
+				8E9B6ABD19A8D4B700ED156D /* ETSWordsListViewController.m in Sources */,
+				8E9B6ABA19A852DE00ED156D /* ETSParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E9B6A9319A8467600ED156D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E9B6AA519A8467600ED156D /* EudicTransformTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8E9B6A9D19A8467600ED156D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E9B6A7B19A8467600ED156D /* EudicTransform */;
+			targetProxy = 8E9B6A9C19A8467600ED156D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8E9B6A8819A8467600ED156D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E9B6A8919A8467600ED156D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8E9B6AA119A8467600ED156D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8E9B6AA219A8467600ED156D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8E9B6AA619A8467600ED156D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		8E9B6AA719A8467600ED156D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8E9B6AA919A8467600ED156D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EudicTransform/EudicTransform-Prefix.pch";
+				INFOPLIST_FILE = "EudicTransform/EudicTransform-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8E9B6AAA19A8467600ED156D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EudicTransform/EudicTransform-Prefix.pch";
+				INFOPLIST_FILE = "EudicTransform/EudicTransform-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		8E9B6AAC19A8467600ED156D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/EudicTransform.app/EudicTransform";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EudicTransform/EudicTransform-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "EudicTransformTests/EudicTransformTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		8E9B6AAD19A8467600ED156D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/EudicTransform.app/EudicTransform";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EudicTransform/EudicTransform-Prefix.pch";
+				INFOPLIST_FILE = "EudicTransformTests/EudicTransformTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E9B6A7719A8467600ED156D /* Build configuration list for PBXProject "EudicTransform" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E9B6AA619A8467600ED156D /* Debug */,
+				8E9B6AA719A8467600ED156D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E9B6AA819A8467600ED156D /* Build configuration list for PBXNativeTarget "EudicTransform" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E9B6AA919A8467600ED156D /* Debug */,
+				8E9B6AAA19A8467600ED156D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E9B6AAB19A8467600ED156D /* Build configuration list for PBXNativeTarget "EudicTransformTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E9B6AAC19A8467600ED156D /* Debug */,
+				8E9B6AAD19A8467600ED156D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E9B6A7419A8467600ED156D /* Project object */;
+}
