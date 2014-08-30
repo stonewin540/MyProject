@@ -14,8 +14,18 @@
 + (instancetype)sharedInstance;
 - (BOOL)open;
 - (BOOL)close;
-- (NSArray *)selectFromItems;
-- (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTableElementItems *)tableItem;
+
+@end
+
+@interface ETSDBHelper (Table)
+
 - (NSArray *)selectFromMaster;
+- (NSArray *)selectFromItems;
+
+@end
+
+@interface ETSDBHelper (Words)
+
+- (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTableElementItems *)tableItem;
 
 @end

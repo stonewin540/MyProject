@@ -124,6 +124,7 @@
 static NSString *const kDBName = @"supermemo.db";
 static NSString *const kTableItems = @"Items";
 static NSString *const kTableMaster = @"sqlite_master";
+static NSString *const kTableCourses = @"Courses";
 
 @interface ETSDBHelper ()
 
@@ -195,6 +196,10 @@ static NSString *const kTableMaster = @"sqlite_master";
     return YES;
 }
 
+@end
+
+@implementation ETSDBHelper (Table)
+
 - (sqlite3_stmt *)prepareSelectFromTable:(NSString *)tableName;
 {
     sqlite3_stmt *statement = NULL;
@@ -212,9 +217,9 @@ static NSString *const kTableMaster = @"sqlite_master";
     return statement;
 }
 
-- (NSArray *)selectFromMaster
+- (NSArray *)selectFromTable:(NSString *)tableName initializationBlock:(id (^)(sqlite3_stmt *statement))initBlock
 {
-    sqlite3_stmt *statement = [self prepareSelectFromTable:kTableMaster];
+    sqlite3_stmt *statement = [self prepareSelectFromTable:tableName];
     if (NULL == statement)
     {
         sqlite3_finalize(statement);
@@ -222,45 +227,38 @@ static NSString *const kTableMaster = @"sqlite_master";
         return nil;
     }
     
-    NSMutableArray *tables = [NSMutableArray array];
+    NSMutableArray *array = [NSMutableArray array];
     
     while (SQLITE_ROW == sqlite3_step(statement))
     {
-        ETSDBMasterTable *table = [[ETSDBMasterTable alloc] initWithStatement:statement];
-        if (table)
+        id object = initBlock(statement);
+        if (nil != object)
         {
-            [tables addObject:table];
+            [array addObject:object];
         }
     }
     sqlite3_finalize(statement);
     
-    return [tables copy];
+    return [array copy];
+}
+
+- (NSArray *)selectFromMaster
+{
+    return [self selectFromTable:kTableMaster initializationBlock:^id(sqlite3_stmt *statement) {
+        return [[ETSDBMasterTable alloc] initWithStatement:statement];
+    }];
 }
 
 - (NSArray *)selectFromItems
 {
-    sqlite3_stmt *statement = [self prepareSelectFromTable:kTableItems];
-    if (NULL == statement)
-    {
-        sqlite3_finalize(statement);
-        NSLog(@"%s select failed!", __func__);
-        return nil;
-    }
-    
-    NSMutableArray *items = [NSMutableArray array];
-    
-    while (SQLITE_ROW == sqlite3_step(statement))
-    {
-        ETSDBTableElementItems *item = [[ETSDBTableElementItems alloc] initWithStatement:statement];
-        if (item)
-        {
-            [items addObject:item];
-        }
-    }
-    sqlite3_finalize(statement);
-    
-    return [items copy];
+    return [self selectFromTable:kTableItems initializationBlock:^id(sqlite3_stmt *statement) {
+        return [[ETSDBTableElementItems alloc] initWithStatement:statement];
+    }];
 }
+
+@end
+
+@implementation ETSDBHelper (Words)
 
 - (NSString *)answerOfWord:(ETSWord *)word
 {
@@ -271,22 +269,22 @@ static NSString *const kTableMaster = @"sqlite_master";
     
     NSMutableString *answer = [NSMutableString string];
     
-//    if ([word.phoneticUK length] > 0)
-//    {
-//        [answer appendFormat:@"uk %@", word.phoneticUK];
-//    }
-//    if ([word.phoneticUS length] > 0)
-//    {
-//        [answer appendFormat:@" us %@", word.phoneticUS];
-//    }
-//    if ([word.remark length] > 0)
-//    {
-//        [answer appendFormat:@"\nremark: %@", word.remark];
-//    }
-//    if ([word.desc length] > 0)
-//    {
-//        [answer appendFormat:@"\n\n%@", word.desc];
-//    }
+    //    if ([word.phoneticUK length] > 0)
+    //    {
+    //        [answer appendFormat:@"uk %@", word.phoneticUK];
+    //    }
+    //    if ([word.phoneticUS length] > 0)
+    //    {
+    //        [answer appendFormat:@" us %@", word.phoneticUS];
+    //    }
+    //    if ([word.remark length] > 0)
+    //    {
+    //        [answer appendFormat:@"\nremark: %@", word.remark];
+    //    }
+    //    if ([word.desc length] > 0)
+    //    {
+    //        [answer appendFormat:@"\n\n%@", word.desc];
+    //    }
     // 很不行，supermemo不接受text plain排版，改用HTML吧～～
     if ([word.phoneticUK length] > 0)
     {
@@ -304,7 +302,7 @@ static NSString *const kTableMaster = @"sqlite_master";
     {
         [answer appendFormat:@"<br></br>%@", word.desc];
     }
-
+    
     
     return answer;
 }
@@ -329,7 +327,7 @@ static NSString *const kTableMaster = @"sqlite_master";
     [insert appendFormat:@"%@, ", kFrequency];
     [insert appendFormat:@"%@, ", kName];
     [insert appendFormat:@"%@, ", kModified];
-
+    
     [insert appendFormat:@"%@, ", kChapterTitle];
     [insert appendFormat:@"%@, ", kLessonTitle];
     [insert appendFormat:@"%@, ", kCommand];
