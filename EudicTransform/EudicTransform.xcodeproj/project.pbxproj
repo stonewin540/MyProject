@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8E0AD07819B16891003B051E /* ETSDBTableItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0AD07719B16891003B051E /* ETSDBTableItem.m */; };
+		8E0AD07819B16891003B051E /* ETSDBTableElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0AD07719B16891003B051E /* ETSDBTableElement.m */; };
+		8E0AD07C19B17B80003B051E /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6AC119A9B90100ED156D /* libsqlite3.dylib */; };
+		8E0AD07F19B18296003B051E /* ETSDBTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0AD07E19B18296003B051E /* ETSDBTable.m */; };
+		8E0AD08219B1880A003B051E /* ETSMasterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E0AD08119B1880A003B051E /* ETSMasterTableViewController.m */; };
 		8E9B6A8019A8467600ED156D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A7F19A8467600ED156D /* Foundation.framework */; };
 		8E9B6A8219A8467600ED156D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A8119A8467600ED156D /* CoreGraphics.framework */; };
 		8E9B6A8419A8467600ED156D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A8319A8467600ED156D /* UIKit.framework */; };
@@ -24,7 +27,6 @@
 		8E9B6ABA19A852DE00ED156D /* ETSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6AB919A852DE00ED156D /* ETSParser.m */; };
 		8E9B6ABD19A8D4B700ED156D /* ETSWordsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6ABC19A8D4B700ED156D /* ETSWordsListViewController.m */; };
 		8E9B6AC019A9B8C000ED156D /* ETSDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6ABF19A9B8C000ED156D /* ETSDBHelper.m */; };
-		8E9B6AC219A9B90100ED156D /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6AC119A9B90100ED156D /* libsqlite3.dylib */; };
 		8ECAD4C519AB2CDC00ACDAC6 /* myWords.html in Resources */ = {isa = PBXBuildFile; fileRef = 8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */; };
 /* End PBXBuildFile section */
 
@@ -39,8 +41,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8E0AD07619B16891003B051E /* ETSDBTableItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSDBTableItem.h; sourceTree = "<group>"; };
-		8E0AD07719B16891003B051E /* ETSDBTableItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSDBTableItem.m; sourceTree = "<group>"; };
+		8E0AD07619B16891003B051E /* ETSDBTableElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSDBTableElement.h; sourceTree = "<group>"; };
+		8E0AD07719B16891003B051E /* ETSDBTableElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSDBTableElement.m; sourceTree = "<group>"; };
+		8E0AD07919B179DA003B051E /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		8E0AD07D19B18296003B051E /* ETSDBTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSDBTable.h; sourceTree = "<group>"; };
+		8E0AD07E19B18296003B051E /* ETSDBTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSDBTable.m; sourceTree = "<group>"; };
+		8E0AD08019B1880A003B051E /* ETSMasterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSMasterTableViewController.h; sourceTree = "<group>"; };
+		8E0AD08119B1880A003B051E /* ETSMasterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSMasterTableViewController.m; sourceTree = "<group>"; };
 		8E9B6A7C19A8467600ED156D /* EudicTransform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EudicTransform.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9B6A7F19A8467600ED156D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E9B6A8119A8467600ED156D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -74,7 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8E9B6AC219A9B90100ED156D /* libsqlite3.dylib in Frameworks */,
+				8E0AD07C19B17B80003B051E /* libsqlite3.dylib in Frameworks */,
 				8E9B6A8219A8467600ED156D /* CoreGraphics.framework in Frameworks */,
 				8E9B6A8419A8467600ED156D /* UIKit.framework in Frameworks */,
 				8E9B6A8019A8467600ED156D /* Foundation.framework in Frameworks */,
@@ -116,6 +123,7 @@
 		8E9B6A7E19A8467600ED156D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8E0AD07919B179DA003B051E /* libsqlite3.0.dylib */,
 				8E9B6AC119A9B90100ED156D /* libsqlite3.dylib */,
 				8E9B6A7F19A8467600ED156D /* Foundation.framework */,
 				8E9B6A8119A8467600ED156D /* CoreGraphics.framework */,
@@ -171,6 +179,8 @@
 		8E9B6AB319A8520D00ED156D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8E0AD08019B1880A003B051E /* ETSMasterTableViewController.h */,
+				8E0AD08119B1880A003B051E /* ETSMasterTableViewController.m */,
 				8E9B6ABB19A8D4B700ED156D /* ETSWordsListViewController.h */,
 				8E9B6ABC19A8D4B700ED156D /* ETSWordsListViewController.m */,
 				8E9B6AB819A852DE00ED156D /* ETSParser.h */,
@@ -184,8 +194,10 @@
 		8E9B6AB419A8520D00ED156D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8E0AD07619B16891003B051E /* ETSDBTableItem.h */,
-				8E0AD07719B16891003B051E /* ETSDBTableItem.m */,
+				8E0AD07D19B18296003B051E /* ETSDBTable.h */,
+				8E0AD07E19B18296003B051E /* ETSDBTable.m */,
+				8E0AD07619B16891003B051E /* ETSDBTableElement.h */,
+				8E0AD07719B16891003B051E /* ETSDBTableElement.m */,
 				8E9B6AB519A8528D00ED156D /* ETSWord.h */,
 				8E9B6AB619A8528D00ED156D /* ETSWord.m */,
 			);
@@ -290,11 +302,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E9B6AC019A9B8C000ED156D /* ETSDBHelper.m in Sources */,
+				8E0AD08219B1880A003B051E /* ETSMasterTableViewController.m in Sources */,
+				8E0AD07F19B18296003B051E /* ETSDBTable.m in Sources */,
 				8E9B6A8C19A8467600ED156D /* main.m in Sources */,
 				8E9B6AB719A8528D00ED156D /* ETSWord.m in Sources */,
 				8E9B6A9019A8467600ED156D /* ETSAppDelegate.m in Sources */,
 				8E9B6ABD19A8D4B700ED156D /* ETSWordsListViewController.m in Sources */,
-				8E0AD07819B16891003B051E /* ETSDBTableItem.m in Sources */,
+				8E0AD07819B16891003B051E /* ETSDBTableElement.m in Sources */,
 				8E9B6ABA19A852DE00ED156D /* ETSParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

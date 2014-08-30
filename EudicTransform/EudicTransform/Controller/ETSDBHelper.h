@@ -7,14 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-@class ETSDBTableItem;
+@class ETSDBTableElementItems;
 
 @interface ETSDBHelper : NSObject
 
 + (instancetype)sharedInstance;
 - (BOOL)open;
 - (BOOL)close;
-- (NSArray *)fetchItemsTable;
-- (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTableItem *)tableItem;
+- (NSArray *)selectFromItems;
+- (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTableElementItems *)tableItem;
+- (NSArray *)selectFromMaster;
 
 @end

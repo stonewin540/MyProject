@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ 映射supermemo表中的元素
+ */
+@interface ETSDBTableElement : NSObject
+
+@end
+
 static NSString *const kCourseId = @"CourseId";
 static NSString *const kPageNum = @"PageNum";
 static NSString *const kParentNum = @"ParentNum";
@@ -57,9 +64,9 @@ static NSString *const kUsedInterval = @"UsedInterval";
 static NSString *const kOrigNewInterval = @"OrigNewInterval";
 
 /**
- 映射supermemo的表对象
+ 对应Items表的一个特例
  */
-@interface ETSDBTableItem : NSObject
+@interface ETSDBTableElementItems : ETSDBTableElement
 
 @property (nonatomic, assign) NSInteger CourseId;
 @property (nonatomic, assign) NSInteger PageNum;

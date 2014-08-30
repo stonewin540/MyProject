@@ -7,11 +7,12 @@
 //
 
 #import "ETSDBHelper.h"
-#import <sqlite3.h>
-#import "ETSDBTableItem.h"
+#import "sqlite3.h"
+#import "ETSDBTableElement.h"
 #import "ETSWord.h"
+#import "ETSDBTable.h"
 
-@implementation ETSDBTableItem (ETSDBHelper)
+@implementation ETSDBTableElementItems (ETSDBHelper)
 
 - (instancetype)initWithStatement:(sqlite3_stmt *)statement
 {
@@ -97,8 +98,32 @@
 
 @end
 
+@implementation ETSDBMasterTable (ETSDBHelper)
+
+- (instancetype)initWithStatement:(sqlite3_stmt *)statement
+{
+    if (NULL == statement)
+    {
+        return NULL;
+    }
+    
+    self = [super init];
+    if (self)
+    {
+        self.type = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 0)];
+        self.name = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 1)];
+        self.tableName = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 2)];
+        self.rootPage = sqlite3_column_int(statement, 3);
+        self.sql = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 4)];
+    }
+    return self;
+}
+
+@end
+
 static NSString *const kDBName = @"supermemo.db";
-static NSString *const kItemsTable = @"Items";
+static NSString *const kTableItems = @"Items";
+static NSString *const kTableMaster = @"sqlite_master";
 
 @interface ETSDBHelper ()
 
@@ -158,36 +183,6 @@ static NSString *const kItemsTable = @"Items";
     return SQLITE_OK == sqlite3_close(_db);
 }
 
-- (NSArray *)fetchItemsTable
-{
-    NSMutableArray *array = [NSMutableArray arrayWithCapacity:10];
-    
-    sqlite3_stmt *statement = nil;
-    //sql语句
-    NSString *select = [NSString stringWithFormat:@"SELECT * FROM %@", kItemsTable];
-    const char *sql = [select UTF8String];//从testTable这个表中获取 testID, testValue ,testName，若获取全部的话可以用*代替testID, testValue ,testName。
-    
-    if (sqlite3_prepare_v2(self.db, sql, -1, &statement, NULL) != SQLITE_OK) {
-        NSLog(@"Error: failed to prepare statement with message:get testValue.");
-        return NO;
-    }
-    else
-    {
-        //查询结果集中一条一条的遍历所有的记录，这里的数字对应的是列值,注意这里的列值，跟上面sqlite3_bind_text绑定的列值不一样！一定要分开，不然会crash，只有这一处的列号不同，注意！
-        while (sqlite3_step(statement) == SQLITE_ROW)
-        {
-            ETSDBTableItem *item = [[ETSDBTableItem alloc] initWithStatement:statement];
-            if (nil != item)
-            {
-                [array addObject:item];
-            }
-        }
-    }
-    sqlite3_finalize(statement);
-    
-    return [array copy];
-}
-
 - (BOOL)execSql:(NSString *)sql
 {
     char *err = NULL;
@@ -198,6 +193,73 @@ static NSString *const kItemsTable = @"Items";
         return NO;
     }
     return YES;
+}
+
+- (sqlite3_stmt *)prepareSelectFromTable:(NSString *)tableName;
+{
+    sqlite3_stmt *statement = NULL;
+    NSString *select = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE type='table'", tableName];
+    
+    const char *unused = NULL;
+    int succeed = sqlite3_prepare_v2(_db, [select UTF8String], -1, &statement, &unused);
+    if (SQLITE_OK != succeed)
+    {
+        NSLog(@"SELECT from %@ failed!", tableName);
+        sqlite3_finalize(statement);
+        return NULL;
+    }
+    
+    return statement;
+}
+
+- (NSArray *)selectFromMaster
+{
+    sqlite3_stmt *statement = [self prepareSelectFromTable:kTableMaster];
+    if (NULL == statement)
+    {
+        sqlite3_finalize(statement);
+        NSLog(@"%s select failed!", __func__);
+        return nil;
+    }
+    
+    NSMutableArray *tables = [NSMutableArray array];
+    
+    while (SQLITE_ROW == sqlite3_step(statement))
+    {
+        ETSDBMasterTable *table = [[ETSDBMasterTable alloc] initWithStatement:statement];
+        if (table)
+        {
+            [tables addObject:table];
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return [tables copy];
+}
+
+- (NSArray *)selectFromItems
+{
+    sqlite3_stmt *statement = [self prepareSelectFromTable:kTableItems];
+    if (NULL == statement)
+    {
+        sqlite3_finalize(statement);
+        NSLog(@"%s select failed!", __func__);
+        return nil;
+    }
+    
+    NSMutableArray *items = [NSMutableArray array];
+    
+    while (SQLITE_ROW == sqlite3_step(statement))
+    {
+        ETSDBTableElementItems *item = [[ETSDBTableElementItems alloc] initWithStatement:statement];
+        if (item)
+        {
+            [items addObject:item];
+        }
+    }
+    sqlite3_finalize(statement);
+    
+    return [items copy];
 }
 
 - (NSString *)answerOfWord:(ETSWord *)word
@@ -249,7 +311,7 @@ static NSString *const kItemsTable = @"Items";
 
 - (BOOL)insertWithLastPageNum:(NSInteger)pageNum word:(ETSWord *)word;
 {
-    NSMutableString *insert = [NSMutableString stringWithFormat:@"INSERT INTO %@ ", kItemsTable];
+    NSMutableString *insert = [NSMutableString stringWithFormat:@"INSERT INTO %@ ", kTableItems];
     
     // keys
     [insert appendFormat:@"("];
@@ -384,7 +446,7 @@ static NSString *const kItemsTable = @"Items";
     return [self execSql:[insert copy]];
 }
 
-- (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTableItem *)tableItem
+- (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTableElementItems *)tableItem
 {
     BOOL succeed = YES;
     

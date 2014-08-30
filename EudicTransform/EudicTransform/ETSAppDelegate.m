@@ -9,8 +9,7 @@
 #import "ETSAppDelegate.h"
 #import "ETSWordsListViewController.h"
 #import "ETSDBHelper.h"
-#import "ETSParser.h"
-#import "ETSDBTableItem.h"
+#import "ETSMasterTableViewController.h"
 
 @implementation ETSAppDelegate
 
@@ -35,23 +34,34 @@
 //        }
 //    }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-       
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"myWords" ofType:@"html"];
-        NSError *error = nil;
-        NSString *string = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-        NSArray *words = [[ETSParser defaultParser] wordsFromHTMLString:string];
-        
-        [[ETSDBHelper sharedInstance] open];
-        NSArray *items = [[ETSDBHelper sharedInstance] fetchItemsTable];
-        [[ETSDBHelper sharedInstance] appendWords:words lastTableItem:[items lastObject]];
-        [[ETSDBHelper sharedInstance] close];
-        
-    });
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
     
-    ETSWordsListViewController *controller = [[ETSWordsListViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
-    self.window.rootViewController = navigationController;
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"myWords" ofType:@"html"];
+//        NSError *error = nil;
+//        NSString *string = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+//        NSArray *words = nil;//[[ETSParser defaultParser] wordsFromHTMLString:string];
+    
+//        [[ETSDBHelper sharedInstance] open];
+//        NSArray *tables = [[ETSDBHelper sharedInstance] selectFromMaster];
+//        NSLog(@"%@", tables);
+//        NSArray *items = [[ETSDBHelper sharedInstance] fetchTableItems];
+//        [[ETSDBHelper sharedInstance] appendWords:words lastTableItem:[items lastObject]];
+//        [[ETSDBHelper sharedInstance] close];
+    
+//    });
+    
+    // prepare DB
+    [[ETSDBHelper sharedInstance] open];
+    
+    ETSWordsListViewController *wordsController = [[ETSWordsListViewController alloc] init];
+    UINavigationController *wordsNavigationController = [[UINavigationController alloc] initWithRootViewController:wordsController];
+    
+    ETSMasterTableViewController *supermemoController = [[ETSMasterTableViewController alloc] init];
+    UINavigationController *supermemoNavigationController = [[UINavigationController alloc] initWithRootViewController:supermemoController];
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    tabBarController.viewControllers = @[supermemoNavigationController, wordsNavigationController];
+    self.window.rootViewController = tabBarController;
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -68,11 +78,13 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [[ETSDBHelper sharedInstance] close];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[ETSDBHelper sharedInstance] open];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -83,6 +95,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [[ETSDBHelper sharedInstance] close];
 }
 
 @end

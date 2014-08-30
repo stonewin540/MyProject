@@ -6,9 +6,13 @@
 //  Copyright (c) 2014 stone win. All rights reserved.
 //
 
-#import "ETSDBTableItem.h"
+#import "ETSDBTableElement.h"
 
-@implementation ETSDBTableItem
+@implementation ETSDBTableElement
+
+@end
+
+@implementation ETSDBTableElementItems
 
 - (NSString *)description
 {
