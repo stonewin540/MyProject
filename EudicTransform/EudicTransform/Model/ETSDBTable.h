@@ -6,12 +6,14 @@
 //  Copyright (c) 2014 stone win. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "ETSDBTableElement.h"
 
 /**
  映射supermemo中的表
+ 
+ 表是一种特殊的Element
  */
-@interface ETSDBTable : NSObject
+@interface ETSDBTable : ETSDBTableElement
 
 @end
 

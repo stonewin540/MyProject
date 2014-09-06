@@ -11,12 +11,3 @@
 @implementation ETSDBTableElement
 
 @end
-
-@implementation ETSDBTEItems
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"<%@: %p; pageNum: %d; prevNum: %d; name: %@; modified: %lld; question: %@>", NSStringFromClass([self class]), self, self.PageNum, self.PrevNum, self.Name, self.Modified, self.Question];
-}
-
-@end

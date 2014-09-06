@@ -8,7 +8,7 @@
 
 #import "ETSDBHelper.h"
 #import "sqlite3.h"
-#import "ETSDBTableElement.h"
+#import "ETSDBTEItems.h"
 #import "ETSWord.h"
 #import "ETSDBTable.h"
 #import "ETSDBTECourses.h"

@@ -8,7 +8,7 @@
 
 #import "ETSTEItemsViewController.h"
 #import "ETSDBHelper.h"
-#import "ETSDBTableElement.h"
+#import "ETSDBTEItems.h"
 
 @interface ETSTEItemsViewController ()
 
