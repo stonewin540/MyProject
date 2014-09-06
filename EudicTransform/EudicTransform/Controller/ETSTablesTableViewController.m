@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 stone win. All rights reserved.
 //
 
-#import "ETSMasterTableViewController.h"
+#import "ETSTablesTableViewController.h"
 #import "ETSDBHelper.h"
 #import "ETSDBTable.h"
 
-@interface ETSMasterTableViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ETSTablesTableViewController () <UITableViewDataSource, UITableViewDelegate>
 
 // UI
 @property (nonatomic, strong) UITableView *tableView;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation ETSMasterTableViewController
+@implementation ETSTablesTableViewController
 
 #pragma mark - DB
 

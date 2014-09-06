@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ETSMasterTableViewController : UIViewController
+@interface ETSTablesTableViewController : UIViewController
 
 @end
