@@ -8,7 +8,7 @@
 
 #import "ETSMasterTablesViewController.h"
 #import "ETSDBHelper.h"
-#import "ETSDBMasterTable.h"
+#import "ETSDBTMaster.h"
 #import "ETSTECoursesViewController.h"
 #import "ETSTEItemsViewController.h"
 
@@ -61,7 +61,7 @@
 {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     
-    ETSDBMasterTable *table = self.data[indexPath.row];
+    ETSDBTMaster *table = self.data[indexPath.row];
     cell.textLabel.text = table.name;
     
     return cell;
@@ -71,7 +71,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ETSDBMasterTable *table = self.data[indexPath.row];
+    ETSDBTMaster *table = self.data[indexPath.row];
     if ([@"Courses" isEqual:table.name])
     {
         ETSTECoursesViewController *controller = [[ETSTECoursesViewController alloc] init];

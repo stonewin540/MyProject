@@ -11,7 +11,7 @@
 /**
  对sqlite_master下表成员的映射的特例
  */
-@interface ETSDBMasterTable : ETSDBTable
+@interface ETSDBTMaster : ETSDBTable
 
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *name;

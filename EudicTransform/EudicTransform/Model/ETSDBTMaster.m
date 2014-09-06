@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 stone win. All rights reserved.
 //
 
-#import "ETSDBMasterTable.h"
+#import "ETSDBTMaster.h"
 
-@implementation ETSDBMasterTable
+@implementation ETSDBTMaster
 
 - (NSString *)description
 {

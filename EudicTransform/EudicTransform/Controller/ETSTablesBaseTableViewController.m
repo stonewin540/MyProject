@@ -8,7 +8,7 @@
 
 #import "ETSTablesBaseTableViewController.h"
 #import "ETSDBHelper.h"
-#import "ETSDBMasterTable.h"
+#import "ETSDBTMaster.h"
 
 @interface ETSTablesBaseTableViewController ()
 
@@ -40,9 +40,9 @@
     if ([tables count] > 0)
     {
         tables = [tables sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            if ([obj1 isKindOfClass:[ETSDBMasterTable class]] && [obj2 isKindOfClass:[ETSDBMasterTable class]])
+            if ([obj1 isKindOfClass:[ETSDBTMaster class]] && [obj2 isKindOfClass:[ETSDBTMaster class]])
             {
-                return [((ETSDBMasterTable *)obj1).name compare:((ETSDBMasterTable *)obj2).name options:NSCaseInsensitiveSearch];
+                return [((ETSDBTMaster *)obj1).name compare:((ETSDBTMaster *)obj2).name options:NSCaseInsensitiveSearch];
             }
             else
             {

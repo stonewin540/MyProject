@@ -10,7 +10,7 @@
 #import "sqlite3.h"
 #import "ETSDBTEItems.h"
 #import "ETSWord.h"
-#import "ETSDBMasterTable.h"
+#import "ETSDBTMaster.h"
 #import "ETSDBTECourses.h"
 
 @implementation ETSDBTEItems (ETSDBHelper)
@@ -99,7 +99,7 @@
 
 @end
 
-@implementation ETSDBMasterTable (ETSDBHelper)
+@implementation ETSDBTMaster (ETSDBHelper)
 
 - (instancetype)initWithStatement:(sqlite3_stmt *)statement
 {
@@ -319,7 +319,7 @@ static NSString *const kTableCourses = @"Courses";
 - (NSArray *)selectFromMaster
 {
     return [self selectFromTable:kTableMaster whereStatement:@"WHERE type='table'" initializationBlock:^id(sqlite3_stmt *statement) {
-        return [[ETSDBMasterTable alloc] initWithStatement:statement];
+        return [[ETSDBTMaster alloc] initWithStatement:statement];
     }];
 }
 
