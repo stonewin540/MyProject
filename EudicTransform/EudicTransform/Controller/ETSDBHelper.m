@@ -11,6 +11,7 @@
 #import "ETSDBTableElement.h"
 #import "ETSWord.h"
 #import "ETSDBTable.h"
+#import "ETSDBTableCourses.h"
 
 @implementation ETSDBTableElementItems (ETSDBHelper)
 
@@ -115,6 +116,70 @@
         self.tableName = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 2)];
         self.rootPage = sqlite3_column_int(statement, 3);
         self.sql = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 4)];
+    }
+    return self;
+}
+
+@end
+
+@implementation ETSDBTableCourses (ETSDBHelper)
+
+- (instancetype)initWithStatement:(sqlite3_stmt *)statement
+{
+    if (NULL == statement)
+    {
+        return nil;
+    }
+    
+    self = [super init];
+    if (self)
+    {
+        self.CoursesId = sqlite3_column_int(statement, 0);
+        self.Guid = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 1)];
+        self.Version = sqlite3_column_int(statement, 2);
+        self.Title = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 3)];
+        
+        self.LangSource = sqlite3_column_int(statement, 4);
+        self.LangTaught = sqlite3_column_int(statement, 5);
+        self.LangTranslations = sqlite3_column_int(statement, 6);
+        self.Type = sqlite3_column_int(statement, 7);
+        
+        self.Path = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 8)];
+        self.Author = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 9)];
+        self.RightsOwner = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 10)];
+        self.Translators = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 11)];
+        
+        self.BoxLink = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 12)];
+        self.Created = sqlite3_column_int(statement, 13);
+        self.Modified = sqlite3_column_int(statement, 14);
+        self.DefItemsPerDay = sqlite3_column_int(statement, 15);
+        
+        self.DefTemplateId = sqlite3_column_int(statement, 16);
+        self.Subscribed = sqlite3_column_int(statement, 17);
+        self.ItemsPerDay = sqlite3_column_int(statement, 18);
+        self.Today = sqlite3_column_int(statement, 19);
+        
+        self.TodayDone = sqlite3_column_int(statement, 20);
+        self.LastPageNum = sqlite3_column_int(statement, 21);
+        self.RequestedFi = sqlite3_column_double(statement, 22);
+        self.OptRect = (__bridge id)sqlite3_column_blob(statement, 23);
+        
+        self.TotalPages = sqlite3_column_int(statement, 24);
+        self.InactivePages = sqlite3_column_int(statement, 25);
+        self.ExercisePages = sqlite3_column_int(statement, 26);
+        self.PagesDone = sqlite3_column_int(statement, 27);
+        
+        self.LastSynchro = sqlite3_column_int(statement, 28);
+        self.LastFreeDaysUpdate = sqlite3_column_int(statement, 29);
+        self.LastServerUpdate = sqlite3_column_int(statement, 30);
+        self.Flags = sqlite3_column_int(statement, 31);
+        
+        self.MenuOrder = sqlite3_column_int(statement, 32);
+        self.FontSize = sqlite3_column_int(statement, 33);
+        self.FontSizeQuestion = sqlite3_column_int(statement, 34);
+        self.FontSizeAnswer = sqlite3_column_int(statement, 35);
+        
+        self.ProductId = sqlite3_column_int(statement, 36);
     }
     return self;
 }
@@ -231,7 +296,11 @@ static NSString *const kTableCourses = @"Courses";
     
     while (SQLITE_ROW == sqlite3_step(statement))
     {
-        id object = initBlock(statement);
+        id object = nil;
+        if (initBlock)
+        {
+            object = initBlock(statement);
+        }
         if (nil != object)
         {
             [array addObject:object];
@@ -253,6 +322,13 @@ static NSString *const kTableCourses = @"Courses";
 {
     return [self selectFromTable:kTableItems initializationBlock:^id(sqlite3_stmt *statement) {
         return [[ETSDBTableElementItems alloc] initWithStatement:statement];
+    }];
+}
+
+- (NSArray *)selectFromCourses
+{
+    return [self selectFromTable:kTableCourses initializationBlock:^id(sqlite3_stmt *statement) {
+        return [[ETSDBTableCourses alloc] initWithStatement:statement];
     }];
 }
 

@@ -21,6 +21,7 @@
 
 - (NSArray *)selectFromMaster;
 - (NSArray *)selectFromItems;
+- (NSArray *)selectFromCourses;
 
 @end
 
