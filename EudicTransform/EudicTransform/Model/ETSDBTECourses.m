@@ -57,4 +57,9 @@ NSString *const ETSDBTECoursesProductId = @"ProductId";
 
 @implementation ETSDBTECourses
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p; CoursesId: %d; Title: %@>", NSStringFromClass([self class]), self, self.CoursesId, self.Title];
+}
+
 @end
