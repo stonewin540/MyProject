@@ -8,52 +8,52 @@
 
 #import "ETSDBTableElement.h"
 
-static NSString *const kId = @"Id";
-static NSString *const kGuid = @"Guid";
-static NSString *const kVersion = @"Version";
-static NSString *const kTitle = @"Title";
+extern NSString *const ETSDBTECoursesId;
+extern NSString *const ETSDBTECoursesGuid;
+extern NSString *const ETSDBTECoursesVersion;
+extern NSString *const ETSDBTECoursesTitle;
 
-static NSString *const kLangSource = @"LangSource";
-static NSString *const kLangeTaught = @"LangTaught";
-static NSString *const kLangTranslations = @"LangTranslations";
-//static NSString *const kType = @"Type";
+extern NSString *const ETSDBTECoursesLangSource;
+extern NSString *const ETSDBTECoursesLangeTaught;
+extern NSString *const ETSDBTECoursesLangTranslations;
+extern NSString *const ETSDBTECoursesType;
 
-static NSString *const kPath = @"Path";
-static NSString *const kAuthor = @"Author";
-static NSString *const kRightsOwner = @"RightsOwner";
-static NSString *const kTranslators = @"Translators";
+extern NSString *const ETSDBTECoursesPath;
+extern NSString *const ETSDBTECoursesAuthor;
+extern NSString *const ETSDBTECoursesRightsOwner;
+extern NSString *const ETSDBTECoursesTranslators;
 
-static NSString *const kBoxLink = @"BoxLink";
-static NSString *const kCreated = @"Created";
-//static NSString *const kModified = @"Modified";
-static NSString *const kDefItemsPerDay = @"DefItemsPerDay";
+extern NSString *const ETSDBTECoursesBoxLink;
+extern NSString *const ETSDBTECoursesCreated;
+extern NSString *const ETSDBTECoursesModified;
+extern NSString *const ETSDBTECoursesDefItemsPerDay;
 
-static NSString *const kDefTemplateId = @"DefTemplateId";
-static NSString *const kSubscribed = @"Subscribed";
-static NSString *const kItemsPerDay = @"ItemsPerDay";
-static NSString *const kToday = @"Today";
+extern NSString *const ETSDBTECoursesDefTemplateId;
+extern NSString *const ETSDBTECoursesSubscribed;
+extern NSString *const ETSDBTECoursesItemsPerDay;
+extern NSString *const ETSDBTECoursesToday;
 
-static NSString *const kTodayDone = @"TodayDone";
-static NSString *const kLastPageNum = @"LastPageNum";
-static NSString *const kRequestedFi = @"RequestedFi";
-static NSString *const kOptRec = @"OptRec";
+extern NSString *const ETSDBTECoursesTodayDone;
+extern NSString *const ETSDBTECoursesLastPageNum;
+extern NSString *const ETSDBTECoursesRequestedFi;
+extern NSString *const ETSDBTECoursesOptRec;
 
-static NSString *const kTotalPages = @"TotalPages";
-static NSString *const kInactivePages = @"InactivePages";
-static NSString *const kExercisePages = @"ExercisePages";
-static NSString *const kPagesDone = @"PagesDone";
+extern NSString *const ETSDBTECoursesTotalPages;
+extern NSString *const ETSDBTECoursesInactivePages;
+extern NSString *const ETSDBTECoursesExercisePages;
+extern NSString *const ETSDBTECoursesPagesDone;
 
-static NSString *const kLastSynchro = @"LastSynchro";
-static NSString *const kLastFreeDaysUpdate = @"LastFreeDaysUpdate";
-static NSString *const kLastServerUpdate = @"LastServerUpdate";
-//static NSString *const kFlags = @"Flags";
+extern NSString *const ETSDBTECoursesLastSynchro;
+extern NSString *const ETSDBTECoursesLastFreeDaysUpdate;
+extern NSString *const ETSDBTECoursesLastServerUpdate;
+extern NSString *const ETSDBTECoursesFlags;
 
-static NSString *const kMenuOrder = @"MenuOrder";
-static NSString *const kFontSize = @"FontSize";
-static NSString *const kFontSizeQuestion = @"FontSizeQuestion";
-static NSString *const kFontSizeAnswer = @"FontSizeAnswer";
+extern NSString *const ETSDBTECoursesMenuOrder;
+extern NSString *const ETSDBTECoursesFontSize;
+extern NSString *const ETSDBTECoursesFontSizeQuestion;
+extern NSString *const ETSDBTECoursesFontSizeAnswer;
 
-static NSString *const kProductId = @"ProductId";
+extern NSString *const ETSDBTECoursesProductId;
 
 /**
  对应Courses表的一个特例

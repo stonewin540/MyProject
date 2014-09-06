@@ -394,65 +394,65 @@ static NSString *const kTableCourses = @"Courses";
     
     // keys
     [insert appendFormat:@"("];
-    [insert appendFormat:@"%@, ", kCourseId];
-    [insert appendFormat:@"%@, ", kPageNum];
-    [insert appendFormat:@"%@, ", kParentNum];
-    [insert appendFormat:@"%@, ", kPrevNum];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsCourseId];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsPageNum];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsParentNum];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsPrevNum];
     
-    [insert appendFormat:@"%@, ", kTemplateId];
-    [insert appendFormat:@"%@, ", kType];
-    [insert appendFormat:@"%@, ", kDisabled];
-    [insert appendFormat:@"%@, ", kKeywords];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsTemplateId];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsType];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsDisabled];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsKeywords];
     
-    [insert appendFormat:@"%@, ", kPartOfSpeech];
-    [insert appendFormat:@"%@, ", kFrequency];
-    [insert appendFormat:@"%@, ", kName];
-    [insert appendFormat:@"%@, ", kModified];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsPartOfSpeech];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsFrequency];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsName];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsModified];
     
-    [insert appendFormat:@"%@, ", kChapterTitle];
-    [insert appendFormat:@"%@, ", kLessonTitle];
-    [insert appendFormat:@"%@, ", kCommand];
-    [insert appendFormat:@"%@, ", kQuestion];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsChapterTitle];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsLessonTitle];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsCommand];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsQuestion];
     
-    [insert appendFormat:@"%@, ", kAnswer];
-    [insert appendFormat:@"%@, ", kQuestionAudio];
-    [insert appendFormat:@"%@, ", kAnswerAudio];
-    [insert appendFormat:@"%@, ", kExamPoints];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsAnswer];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsQuestionAudio];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsAnswerAudio];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsExamPoints];
     
-    [insert appendFormat:@"%@, ", kGfx1Id];
-    [insert appendFormat:@"%@, ", kGfx1GroupId];
-    [insert appendFormat:@"%@, ", kGfx1Shuffle];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsGfx1Id];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsGfx1GroupId];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsGfx1Shuffle];
     
-    [insert appendFormat:@"%@, ", kGfx2Id];
-    [insert appendFormat:@"%@, ", kGfx2GroupId];
-    [insert appendFormat:@"%@, ", kGfx2Shuffle];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsGfx2Id];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsGfx2GroupId];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsGfx2Shuffle];
     
-    [insert appendFormat:@"%@, ", kGfx3Id];
-    [insert appendFormat:@"%@, ", kGfx3GroupId];
-    [insert appendFormat:@"%@, ", kGfx3Shuffle];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsGfx3Id];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsGfx3GroupId];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsGfx3Shuffle];
     
-    [insert appendFormat:@"%@, ", kQueueOrder];
-    [insert appendFormat:@"%@, ", kStatus];
-    [insert appendFormat:@"%@, ", kLastRepetition];
-    [insert appendFormat:@"%@, ", kNextRepetition];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsQueueOrder];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsStatus];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsLastRepetition];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsNextRepetition];
     
-    [insert appendFormat:@"%@, ", kAFactor];
-    [insert appendFormat:@"%@, ", kEstimatedFI];
-    [insert appendFormat:@"%@, ", kExpectedFI];
-    [insert appendFormat:@"%@, ", kFirstGrade];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsAFactor];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsEstimatedFI];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsExpectedFI];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsFirstGrade];
     
-    [insert appendFormat:@"%@, ", kFlags];
-    [insert appendFormat:@"%@, ", kGrades];
-    [insert appendFormat:@"%@, ", kLapses];
-    [insert appendFormat:@"%@, ", kNewInterval];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsFlags];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsGrades];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsLapses];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsNewInterval];
     
-    [insert appendFormat:@"%@, ", kNormalizedGrade];
-    [insert appendFormat:@"%@, ", kRepetitions];
-    [insert appendFormat:@"%@, ", kRepetitionsCategory];
-    [insert appendFormat:@"%@, ", kUFactor];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsNormalizedGrade];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsRepetitions];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsRepetitionsCategory];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsUFactor];
     
-    [insert appendFormat:@"%@, ", kUsedInterval];
-    [insert appendFormat:@"%@", kOrigNewInterval];
+    [insert appendFormat:@"%@, ", ETSDBTEItemsUsedInterval];
+    [insert appendFormat:@"%@", ETSDBTEItemsOrigNewInterval];
     
     [insert appendFormat:@") "];
     
