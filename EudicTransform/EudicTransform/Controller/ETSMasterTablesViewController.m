@@ -8,7 +8,7 @@
 
 #import "ETSMasterTablesViewController.h"
 #import "ETSDBHelper.h"
-#import "ETSDBTable.h"
+#import "ETSDBMasterTable.h"
 #import "ETSTECoursesViewController.h"
 #import "ETSTEItemsViewController.h"
 

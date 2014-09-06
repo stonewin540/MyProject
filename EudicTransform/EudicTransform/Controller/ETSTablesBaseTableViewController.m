@@ -8,7 +8,7 @@
 
 #import "ETSTablesBaseTableViewController.h"
 #import "ETSDBHelper.h"
-#import "ETSDBTable.h"
+#import "ETSDBMasterTable.h"
 
 @interface ETSTablesBaseTableViewController ()
 

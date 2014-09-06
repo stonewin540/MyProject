@@ -10,7 +10,7 @@
 #import "sqlite3.h"
 #import "ETSDBTEItems.h"
 #import "ETSWord.h"
-#import "ETSDBTable.h"
+#import "ETSDBMasterTable.h"
 #import "ETSDBTECourses.h"
 
 @implementation ETSDBTEItems (ETSDBHelper)

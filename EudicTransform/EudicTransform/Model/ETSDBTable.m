@@ -11,12 +11,3 @@
 @implementation ETSDBTable
 
 @end
-
-@implementation ETSDBMasterTable
-
-- (NSString *)description
-{
-    return [NSString stringWithFormat:@"<%@: %p; name: %@; rootPage: %d>", NSStringFromClass([self class]), self, self.name, self.rootPage];
-}
-
-@end
