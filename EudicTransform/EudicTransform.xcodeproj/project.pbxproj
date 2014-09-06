@@ -19,6 +19,7 @@
 		8E9ABF9719BAF1D0004AF557 /* ETSTECoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF8F19BAF1D0004AF557 /* ETSTECoursesViewController.m */; };
 		8E9ABF9819BAF1D0004AF557 /* ETSTEItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF9119BAF1D0004AF557 /* ETSTEItemsViewController.m */; };
 		8E9ABF9919BAF1D0004AF557 /* ETSWordsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF9319BAF1D0004AF557 /* ETSWordsListViewController.m */; };
+		8E9ABF9C19BAF37C004AF557 /* ETSComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF9B19BAF37C004AF557 /* ETSComparisonViewController.m */; };
 		8E9B6A8019A8467600ED156D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A7F19A8467600ED156D /* Foundation.framework */; };
 		8E9B6A8219A8467600ED156D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A8119A8467600ED156D /* CoreGraphics.framework */; };
 		8E9B6A8419A8467600ED156D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E9B6A8319A8467600ED156D /* UIKit.framework */; };
@@ -71,6 +72,8 @@
 		8E9ABF9119BAF1D0004AF557 /* ETSTEItemsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSTEItemsViewController.m; sourceTree = "<group>"; };
 		8E9ABF9219BAF1D0004AF557 /* ETSWordsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSWordsListViewController.h; sourceTree = "<group>"; };
 		8E9ABF9319BAF1D0004AF557 /* ETSWordsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSWordsListViewController.m; sourceTree = "<group>"; };
+		8E9ABF9A19BAF37C004AF557 /* ETSComparisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSComparisonViewController.h; sourceTree = "<group>"; };
+		8E9ABF9B19BAF37C004AF557 /* ETSComparisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSComparisonViewController.m; sourceTree = "<group>"; };
 		8E9B6A7C19A8467600ED156D /* EudicTransform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EudicTransform.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E9B6A7F19A8467600ED156D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		8E9B6A8119A8467600ED156D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -125,6 +128,8 @@
 		8E9ABF8719BAF1D0004AF557 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8E9ABF9A19BAF37C004AF557 /* ETSComparisonViewController.h */,
+				8E9ABF9B19BAF37C004AF557 /* ETSComparisonViewController.m */,
 				8E9ABF8819BAF1D0004AF557 /* ETSMasterTablesViewController.h */,
 				8E9ABF8919BAF1D0004AF557 /* ETSMasterTablesViewController.m */,
 				8E9ABF8A19BAF1D0004AF557 /* ETSTableElementsBaseViewController.h */,
@@ -351,6 +356,7 @@
 				8E0AD07F19B18296003B051E /* ETSDBTable.m in Sources */,
 				8E9B6A8C19A8467600ED156D /* main.m in Sources */,
 				8E0AD08519B19D1F003B051E /* ETSDBTECourses.m in Sources */,
+				8E9ABF9C19BAF37C004AF557 /* ETSComparisonViewController.m in Sources */,
 				8E9ABF9419BAF1D0004AF557 /* ETSMasterTablesViewController.m in Sources */,
 				8E9B6AB719A8528D00ED156D /* ETSWord.m in Sources */,
 				8E9B6A9019A8467600ED156D /* ETSAppDelegate.m in Sources */,

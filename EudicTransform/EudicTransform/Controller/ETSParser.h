@@ -13,6 +13,7 @@
  */
 @interface ETSParser : NSObject
 
++ (NSString *)eudicHTMLString;
 + (instancetype)defaultParser;
 /**
  获取pattern之间的字符串

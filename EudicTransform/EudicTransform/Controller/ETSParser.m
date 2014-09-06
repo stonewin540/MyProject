@@ -253,6 +253,22 @@
 
 @implementation ETSParser
 
++ (NSString *)eudicHTMLString
+{
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"myWords" ofType:@"html"];
+    if ([path length] > 0)
+    {
+        NSError *error = nil;
+        NSString *string = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
+        if (nil == error)
+        {
+            return string;
+        }
+    }
+    
+    return nil;
+}
+
 + (instancetype)defaultParser
 {
     static ETSParser *parser;

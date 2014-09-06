@@ -10,6 +10,7 @@
 #import "ETSWordsListViewController.h"
 #import "ETSDBHelper.h"
 #import "ETSMasterTablesViewController.h"
+#import "ETSComparisonViewController.h"
 
 @implementation ETSAppDelegate
 
@@ -59,8 +60,11 @@
     ETSMasterTablesViewController *supermemoController = [[ETSMasterTablesViewController alloc] init];
     UINavigationController *supermemoNavigationController = [[UINavigationController alloc] initWithRootViewController:supermemoController];
     
+    ETSComparisonViewController *comparisonController = [[ETSComparisonViewController alloc] init];
+    UINavigationController *comparisonNavigationController = [[UINavigationController alloc] initWithRootViewController:comparisonController];
+    
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[supermemoNavigationController, wordsNavigationController];
+    tabBarController.viewControllers = @[supermemoNavigationController, wordsNavigationController, comparisonNavigationController];
     self.window.rootViewController = tabBarController;
     
     self.window.backgroundColor = [UIColor whiteColor];
