@@ -66,7 +66,7 @@ static NSString *const kOrigNewInterval = @"OrigNewInterval";
 /**
  对应Items表的一个特例
  */
-@interface ETSDBTableElementItems : ETSDBTableElement
+@interface ETSDBTEItems : ETSDBTableElement
 
 @property (nonatomic, assign) NSInteger CourseId;
 @property (nonatomic, assign) NSInteger PageNum;

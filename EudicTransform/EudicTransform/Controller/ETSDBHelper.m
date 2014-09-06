@@ -11,9 +11,9 @@
 #import "ETSDBTableElement.h"
 #import "ETSWord.h"
 #import "ETSDBTable.h"
-#import "ETSDBTableCourses.h"
+#import "ETSDBTECourses.h"
 
-@implementation ETSDBTableElementItems (ETSDBHelper)
+@implementation ETSDBTEItems (ETSDBHelper)
 
 - (instancetype)initWithStatement:(sqlite3_stmt *)statement
 {
@@ -122,7 +122,7 @@
 
 @end
 
-@implementation ETSDBTableCourses (ETSDBHelper)
+@implementation ETSDBTECourses (ETSDBHelper)
 
 - (instancetype)initWithStatement:(sqlite3_stmt *)statement
 {
@@ -326,14 +326,14 @@ static NSString *const kTableCourses = @"Courses";
 - (NSArray *)selectFromItems
 {
     return [self selectFromTable:kTableItems whereStatement:nil initializationBlock:^id(sqlite3_stmt *statement) {
-        return [[ETSDBTableElementItems alloc] initWithStatement:statement];
+        return [[ETSDBTEItems alloc] initWithStatement:statement];
     }];
 }
 
 - (NSArray *)selectFromCourses
 {
     return [self selectFromTable:kTableCourses whereStatement:nil initializationBlock:^id(sqlite3_stmt *statement) {
-        return [[ETSDBTableCourses alloc] initWithStatement:statement];
+        return [[ETSDBTECourses alloc] initWithStatement:statement];
     }];
 }
 
@@ -525,7 +525,7 @@ static NSString *const kTableCourses = @"Courses";
     return [self execSql:[insert copy]];
 }
 
-- (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTableElementItems *)tableItem
+- (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTEItems *)tableItem
 {
     BOOL succeed = YES;
     

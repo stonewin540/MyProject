@@ -58,7 +58,7 @@ static NSString *const kProductId = @"ProductId";
 /**
  对应Courses表的一个特例
  */
-@interface ETSDBTableCourses : ETSDBTableElement
+@interface ETSDBTECourses : ETSDBTableElement
 
 @property (nonatomic, assign) NSInteger CoursesId;
 @property (nonatomic, copy) NSString *Guid;

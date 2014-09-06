@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 stone win. All rights reserved.
 //
 
-#import "ETSDBTableCourses.h"
+#import "ETSDBTECourses.h"
 
-@implementation ETSDBTableCourses
+@implementation ETSDBTECourses
 
 @end

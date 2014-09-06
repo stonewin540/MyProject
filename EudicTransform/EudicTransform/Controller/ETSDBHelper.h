@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class ETSDBTableElementItems;
+@class ETSDBTEItems;
 
 @interface ETSDBHelper : NSObject
 
@@ -27,6 +27,6 @@
 
 @interface ETSDBHelper (Words)
 
-- (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTableElementItems *)tableItem;
+- (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTEItems *)tableItem;
 
 @end

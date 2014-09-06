@@ -60,7 +60,7 @@
 {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     
-    ETSDBTableElementItems *element = self.data[indexPath.row];
+    ETSDBTEItems *element = self.data[indexPath.row];
     cell.textLabel.text = element.Name;
     
     return cell;

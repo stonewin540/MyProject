@@ -8,7 +8,7 @@
 
 #import "ETSTECoursesViewController.h"
 #import "ETSDBHelper.h"
-#import "ETSDBTableCourses.h"
+#import "ETSDBTECourses.h"
 
 @interface ETSTECoursesViewController ()
 
@@ -60,7 +60,7 @@
 {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     
-    ETSDBTableCourses *element = self.data[indexPath.row];
+    ETSDBTECourses *element = self.data[indexPath.row];
     cell.textLabel.text = element.Title;
     
     return cell;
