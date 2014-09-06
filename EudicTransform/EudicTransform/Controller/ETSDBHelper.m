@@ -134,9 +134,9 @@
     self = [super init];
     if (self)
     {
-        self.CoursesId = sqlite3_column_int(statement, 0);
-        self.Guid = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 1)];
-        self.Version = sqlite3_column_int(statement, 2);
+//        self.CoursesId = sqlite3_column_int(statement, 0);
+//        self.Guid = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 1)];
+//        self.Version = sqlite3_column_int(statement, 2);
         self.Title = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 3)];
         
         self.LangSource = sqlite3_column_int(statement, 4);
@@ -162,7 +162,8 @@
         self.TodayDone = sqlite3_column_int(statement, 20);
         self.LastPageNum = sqlite3_column_int(statement, 21);
         self.RequestedFi = sqlite3_column_double(statement, 22);
-        self.OptRect = (__bridge id)sqlite3_column_blob(statement, 23);
+//        self.OptRec = (void *)sqlite3_column_blob(statement, 23);
+        self.OptRec = [NSData dataWithBytes:sqlite3_column_blob(statement, 23) length:sqlite3_column_bytes(statement, 23)];
         
         self.TotalPages = sqlite3_column_int(statement, 24);
         self.InactivePages = sqlite3_column_int(statement, 25);
@@ -265,10 +266,14 @@ static NSString *const kTableCourses = @"Courses";
 
 @implementation ETSDBHelper (Table)
 
-- (sqlite3_stmt *)prepareSelectFromTable:(NSString *)tableName;
+- (sqlite3_stmt *)prepareSelectFromTable:(NSString *)tableName whereStatement:(NSString *)where;
 {
     sqlite3_stmt *statement = NULL;
-    NSString *select = [NSString stringWithFormat:@"SELECT * FROM %@ WHERE type='table'", tableName];
+    NSString *select = [NSString stringWithFormat:@"SELECT * FROM %@", tableName];
+    if ([where length] > 0)
+    {
+        select = [select stringByAppendingFormat:@" %@", where];
+    }
     
     const char *unused = NULL;
     int succeed = sqlite3_prepare_v2(_db, [select UTF8String], -1, &statement, &unused);
@@ -282,9 +287,9 @@ static NSString *const kTableCourses = @"Courses";
     return statement;
 }
 
-- (NSArray *)selectFromTable:(NSString *)tableName initializationBlock:(id (^)(sqlite3_stmt *statement))initBlock
+- (NSArray *)selectFromTable:(NSString *)tableName whereStatement:(NSString *)where initializationBlock:(id (^)(sqlite3_stmt *statement))initBlock
 {
-    sqlite3_stmt *statement = [self prepareSelectFromTable:tableName];
+    sqlite3_stmt *statement = [self prepareSelectFromTable:tableName whereStatement:where];
     if (NULL == statement)
     {
         sqlite3_finalize(statement);
@@ -313,21 +318,21 @@ static NSString *const kTableCourses = @"Courses";
 
 - (NSArray *)selectFromMaster
 {
-    return [self selectFromTable:kTableMaster initializationBlock:^id(sqlite3_stmt *statement) {
+    return [self selectFromTable:kTableMaster whereStatement:@"WHERE type='table'" initializationBlock:^id(sqlite3_stmt *statement) {
         return [[ETSDBMasterTable alloc] initWithStatement:statement];
     }];
 }
 
 - (NSArray *)selectFromItems
 {
-    return [self selectFromTable:kTableItems initializationBlock:^id(sqlite3_stmt *statement) {
+    return [self selectFromTable:kTableItems whereStatement:nil initializationBlock:^id(sqlite3_stmt *statement) {
         return [[ETSDBTableElementItems alloc] initWithStatement:statement];
     }];
 }
 
 - (NSArray *)selectFromCourses
 {
-    return [self selectFromTable:kTableCourses initializationBlock:^id(sqlite3_stmt *statement) {
+    return [self selectFromTable:kTableCourses whereStatement:nil initializationBlock:^id(sqlite3_stmt *statement) {
         return [[ETSDBTableCourses alloc] initWithStatement:statement];
     }];
 }

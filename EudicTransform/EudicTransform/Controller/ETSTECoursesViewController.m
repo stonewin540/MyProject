@@ -1,26 +1,24 @@
 //
-//  ETSMasterTablesViewController.m
+//  ETSTICoursesViewController.m
 //  EudicTransform
 //
 //  Created by stone win on 9/6/14.
 //  Copyright (c) 2014 stone win. All rights reserved.
 //
 
-#import "ETSMasterTablesViewController.h"
-#import "ETSDBHelper.h"
-#import "ETSDBTable.h"
 #import "ETSTECoursesViewController.h"
-#import "ETSTEItemsViewController.h"
+#import "ETSDBHelper.h"
+#import "ETSDBTableCourses.h"
 
-@interface ETSMasterTablesViewController ()
+@interface ETSTECoursesViewController ()
 
 @end
 
-@implementation ETSMasterTablesViewController
+@implementation ETSTECoursesViewController
 
 - (NSArray *)dataFromTables
 {
-    return [[ETSDBHelper sharedInstance] selectFromMaster];
+    return [[ETSDBHelper sharedInstance] selectFromCourses];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -28,6 +26,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.title = @"Courses";
     }
     return self;
 }
@@ -61,27 +60,12 @@
 {
     UITableViewCell *cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
     
-    ETSDBMasterTable *table = self.data[indexPath.row];
-    cell.textLabel.text = table.name;
+    ETSDBTableCourses *element = self.data[indexPath.row];
+    cell.textLabel.text = element.Title;
     
     return cell;
 }
 
 #pragma mark - TableView Delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ETSDBMasterTable *table = self.data[indexPath.row];
-    if ([@"Courses" isEqual:table.name])
-    {
-        ETSTECoursesViewController *controller = [[ETSTECoursesViewController alloc] init];
-        [self.navigationController pushViewController:controller animated:YES];
-    }
-    else if ([@"Items" isEqual:table.name])
-    {
-        ETSTEItemsViewController *controller = [[ETSTEItemsViewController alloc] init];
-        [self.navigationController pushViewController:controller animated:YES];
-    }
-}
 
 @end

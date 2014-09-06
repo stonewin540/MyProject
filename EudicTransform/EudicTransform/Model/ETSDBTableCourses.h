@@ -88,7 +88,8 @@ static NSString *const kProductId = @"ProductId";
 @property (nonatomic, assign) NSInteger TodayDone;
 @property (nonatomic, assign) NSInteger LastPageNum;
 @property (nonatomic, assign) CGFloat RequestedFi;
-@property (nonatomic, strong) id OptRect;
+//@property (nonatomic, assign) void *OptRec;
+@property (nonatomic, strong) NSData *OptRec;
 
 @property (nonatomic, assign) NSInteger TotalPages;
 @property (nonatomic, assign) NSInteger InactivePages;
