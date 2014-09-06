@@ -12,13 +12,23 @@
 
 @interface ETSTEItemsViewController ()
 
+@property (nonatomic, strong) NSArray *setedItems;
+@property (nonatomic, assign) BOOL isInitWithItems;
+
 @end
 
 @implementation ETSTEItemsViewController
 
 - (NSArray *)dataFromTables
 {
-    return [[ETSDBHelper sharedInstance] selectFromItems];
+    if (self.isInitWithItems)
+    {
+        return self.setedItems;
+    }
+    else
+    {
+        return [[ETSDBHelper sharedInstance] selectFromItems];
+    }
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -27,6 +37,17 @@
     if (self) {
         // Custom initialization
         self.title = @"Items";
+    }
+    return self;
+}
+
+- (instancetype)initWithItems:(NSArray *)items
+{
+    self = [super init];
+    if (self)
+    {
+        self.setedItems = items;
+        self.isInitWithItems = YES;
     }
     return self;
 }

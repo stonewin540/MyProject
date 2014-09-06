@@ -134,9 +134,9 @@
     self = [super init];
     if (self)
     {
-//        self.CoursesId = sqlite3_column_int(statement, 0);
-//        self.Guid = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 1)];
-//        self.Version = sqlite3_column_int(statement, 2);
+        self.CoursesId = sqlite3_column_int(statement, 0);
+        self.Guid = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 1)];
+        self.Version = sqlite3_column_int(statement, 2);
         self.Title = [NSString stringWithFormat:@"%s", sqlite3_column_text(statement, 3)];
         
         self.LangSource = sqlite3_column_int(statement, 4);
@@ -187,10 +187,11 @@
 
 @end
 
+NSString *const ETSDBHelperTableItemsName = @"Items";
+NSString *const ETSDBHelperTableCoursesName = @"Courses";
+
 static NSString *const kDBName = @"supermemo.db";
-static NSString *const kTableItems = @"Items";
 static NSString *const kTableMaster = @"sqlite_master";
-static NSString *const kTableCourses = @"Courses";
 
 @interface ETSDBHelper ()
 
@@ -325,15 +326,23 @@ static NSString *const kTableCourses = @"Courses";
 
 - (NSArray *)selectFromItems
 {
-    return [self selectFromTable:kTableItems whereStatement:nil initializationBlock:^id(sqlite3_stmt *statement) {
+    return [self selectFromTable:ETSDBHelperTableItemsName whereStatement:nil initializationBlock:^id(sqlite3_stmt *statement) {
         return [[ETSDBTEItems alloc] initWithStatement:statement];
     }];
 }
 
 - (NSArray *)selectFromCourses
 {
-    return [self selectFromTable:kTableCourses whereStatement:nil initializationBlock:^id(sqlite3_stmt *statement) {
+    return [self selectFromTable:ETSDBHelperTableCoursesName whereStatement:nil initializationBlock:^id(sqlite3_stmt *statement) {
         return [[ETSDBTECourses alloc] initWithStatement:statement];
+    }];
+}
+
+- (NSArray *)selectFromItemsWithCourseId:(NSInteger)courseId
+{
+    NSString *where = [NSString stringWithFormat:@"WHERE %@=%d", ETSDBTEItemsCourseId, courseId];
+    return [self selectFromTable:ETSDBHelperTableItemsName whereStatement:where initializationBlock:^id(sqlite3_stmt *statement) {
+        return [[ETSDBTEItems alloc] initWithStatement:statement];
     }];
 }
 
@@ -390,7 +399,7 @@ static NSString *const kTableCourses = @"Courses";
 
 - (BOOL)insertWithLastPageNum:(NSInteger)pageNum word:(ETSWord *)word;
 {
-    NSMutableString *insert = [NSMutableString stringWithFormat:@"INSERT INTO %@ ", kTableItems];
+    NSMutableString *insert = [NSMutableString stringWithFormat:@"INSERT INTO %@ ", ETSDBHelperTableItemsName];
     
     // keys
     [insert appendFormat:@"("];

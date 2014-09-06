@@ -20,7 +20,13 @@
 
 - (NSArray *)dataFromTables
 {
-    return [[ETSDBHelper sharedInstance] selectFromMaster];
+    
+    NSArray *shownTables = @[ETSDBHelperTableCoursesName, ETSDBHelperTableItemsName];
+    NSArray *tables = [[ETSDBHelper sharedInstance] selectFromMaster];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name IN %@", shownTables];
+    NSArray *filteredArray = [tables filteredArrayUsingPredicate:predicate];
+    return filteredArray;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -72,12 +78,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ETSDBTMaster *table = self.data[indexPath.row];
-    if ([@"Courses" isEqual:table.name])
+    if ([ETSDBHelperTableCoursesName isEqual:table.name])
     {
         ETSTECoursesViewController *controller = [[ETSTECoursesViewController alloc] init];
         [self.navigationController pushViewController:controller animated:YES];
     }
-    else if ([@"Items" isEqual:table.name])
+    else if ([ETSDBHelperTableItemsName isEqual:table.name])
     {
         ETSTEItemsViewController *controller = [[ETSTEItemsViewController alloc] init];
         [self.navigationController pushViewController:controller animated:YES];

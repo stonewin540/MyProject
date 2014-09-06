@@ -10,4 +10,6 @@
 
 @interface ETSTEItemsViewController : ETSTableElementsBaseViewController
 
+- (instancetype)initWithItems:(NSArray *)items;
+
 @end

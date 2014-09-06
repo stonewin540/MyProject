@@ -9,6 +9,7 @@
 #import "ETSTECoursesViewController.h"
 #import "ETSDBHelper.h"
 #import "ETSDBTECourses.h"
+#import "ETSTEItemsViewController.h"
 
 @interface ETSTECoursesViewController ()
 
@@ -67,5 +68,13 @@
 }
 
 #pragma mark - TableView Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ETSDBTECourses *element = self.data[indexPath.row];
+    NSArray *items = [[ETSDBHelper sharedInstance] selectFromItemsWithCourseId:element.CoursesId];
+    ETSTEItemsViewController *controller = [[ETSTEItemsViewController alloc] initWithItems:items];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
 @end

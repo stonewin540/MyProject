@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 @class ETSDBTEItems;
 
+extern NSString *const ETSDBHelperTableItemsName;
+extern NSString *const ETSDBHelperTableCoursesName;
+
 @interface ETSDBHelper : NSObject
 
 + (instancetype)sharedInstance;
@@ -22,6 +25,7 @@
 - (NSArray *)selectFromMaster;
 - (NSArray *)selectFromItems;
 - (NSArray *)selectFromCourses;
+- (NSArray *)selectFromItemsWithCourseId:(NSInteger)courseId;
 
 @end
 
