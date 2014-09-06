@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ETSTablesBaseTableViewController : UIViewController
+@interface ETSTablesBaseTableViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+// data
+@property (nonatomic, strong) NSArray *data;
+
+- (NSArray *)dataFromTables;
 
 @end

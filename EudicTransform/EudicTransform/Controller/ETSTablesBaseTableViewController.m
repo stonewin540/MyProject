@@ -10,16 +10,21 @@
 #import "ETSDBHelper.h"
 #import "ETSDBTable.h"
 
-@interface ETSTablesBaseTableViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ETSTablesBaseTableViewController ()
 
 // UI
 @property (nonatomic, strong) UITableView *tableView;
-// data
-@property (nonatomic, strong) NSArray *data;
 
 @end
 
 @implementation ETSTablesBaseTableViewController
+
+#pragma mark - Subclass
+
+- (NSArray *)dataFromTables
+{
+    return nil;
+}
 
 #pragma mark - DB
 
@@ -28,22 +33,25 @@
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Loading…" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
     [alertView show];
     
-    NSArray *tables = [[ETSDBHelper sharedInstance] selectFromMaster];
+    NSArray *tables = [self dataFromTables];
     self.data = tables;
     [self.tableView reloadData];
     
-    tables = [tables sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        if ([obj1 isKindOfClass:[ETSDBMasterTable class]] && [obj2 isKindOfClass:[ETSDBMasterTable class]])
-        {
-            return [((ETSDBMasterTable *)obj1).name compare:((ETSDBMasterTable *)obj2).name options:NSCaseInsensitiveSearch];
-        }
-        else
-        {
-            return NSOrderedSame;
-        }
-    }];
-    self.data = tables;
-    [self.tableView reloadData];
+    if ([tables count] > 0)
+    {
+        tables = [tables sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            if ([obj1 isKindOfClass:[ETSDBMasterTable class]] && [obj2 isKindOfClass:[ETSDBMasterTable class]])
+            {
+                return [((ETSDBMasterTable *)obj1).name compare:((ETSDBMasterTable *)obj2).name options:NSCaseInsensitiveSearch];
+            }
+            else
+            {
+                return NSOrderedSame;
+            }
+        }];
+        self.data = tables;
+        [self.tableView reloadData];
+    }
     
     [alertView dismissWithClickedButtonIndex:0 animated:YES];
 }
@@ -93,7 +101,6 @@
 {
     self.tableView.dataSource = nil;
     self.tableView.delegate = nil;
-    [[ETSDBHelper sharedInstance] close];
 }
 
 /*
@@ -123,9 +130,6 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
-    ETSDBMasterTable *table = self.data[indexPath.row];
-    cell.textLabel.text = table.name;
     
     return cell;
 }

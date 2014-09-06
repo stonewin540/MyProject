@@ -9,7 +9,7 @@
 #import "ETSAppDelegate.h"
 #import "ETSWordsListViewController.h"
 #import "ETSDBHelper.h"
-#import "ETSTablesBaseTableViewController.h"
+#import "ETSMasterTablesViewController.h"
 
 @implementation ETSAppDelegate
 
@@ -56,7 +56,7 @@
     ETSWordsListViewController *wordsController = [[ETSWordsListViewController alloc] init];
     UINavigationController *wordsNavigationController = [[UINavigationController alloc] initWithRootViewController:wordsController];
     
-    ETSTablesBaseTableViewController *supermemoController = [[ETSTablesBaseTableViewController alloc] init];
+    ETSMasterTablesViewController *supermemoController = [[ETSMasterTablesViewController alloc] init];
     UINavigationController *supermemoNavigationController = [[UINavigationController alloc] initWithRootViewController:supermemoController];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
