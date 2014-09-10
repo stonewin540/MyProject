@@ -11,6 +11,8 @@
 #import "ETSDBHelper.h"
 #import "ETSCoursesChooseViewController.h"
 #import "ETSDBTECourses.h"
+#import "ETSWord.h"
+#import "ETSDBTEItems.h"
 
 typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
     ETSComparisonItemTypeEudicWords,
@@ -37,6 +39,8 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
 // data
 @property (nonatomic, strong) NSArray *data;
 @property (nonatomic, strong) ETSDBTECourses *selectedCourse;
+@property (nonatomic, strong) NSArray *words;
+@property (nonatomic, strong) NSArray *courseItems;
 
 @end
 
@@ -44,28 +48,85 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
 
 #pragma mark - Helper
 
+- (NSArray *)words
+{
+    if (!_words)
+    {
+        _words = [[ETSParser defaultParser] wordsFromHTMLString:[ETSParser eudicHTMLString]];
+    }
+    return _words;
+}
+
+- (NSArray *)courseItems
+{
+    if (!_courseItems)
+    {
+        if (nil != self.selectedCourse)
+        {
+            _courseItems = [[ETSDBHelper sharedInstance] selectFromItemsWithCourseId:self.selectedCourse.CoursesId];
+        }
+    }
+    return _courseItems;
+}
+
 - (void)prepareData
 {
-    NSArray *words = nil;
-    NSArray *courses = nil;
-    words = [[ETSParser defaultParser] wordsFromHTMLString:[ETSParser eudicHTMLString]];
-    if (nil != self.selectedCourse)
-    {
-        courses = [[ETSDBHelper sharedInstance] selectFromItemsWithCourseId:self.selectedCourse.CoursesId];
-    }
-    
+//    NSArray *words = nil;
+//    NSArray *courses = nil;
+//    words = [[ETSParser defaultParser] wordsFromHTMLString:[ETSParser eudicHTMLString]];
+//    if (nil != self.selectedCourse)
+//    {
+//        courses = [[ETSDBHelper sharedInstance] selectFromItemsWithCourseId:self.selectedCourse.CoursesId];
+//    }
+//    
     ETSComparisonItem *wordsItem = [[ETSComparisonItem alloc] init];
     wordsItem.type = ETSComparisonItemTypeEudicWords;
     wordsItem.text = @"Eudic MyWords";
-    wordsItem.detailText = [NSString stringWithFormat:@"count: %u", [words count]];
+    wordsItem.detailText = [NSString stringWithFormat:@"count: %u", [self.words count]];
     wordsItem.headerText = @"Eudic";
     ETSComparisonItem *coursesItem = [[ETSComparisonItem alloc] init];
     coursesItem.type = ETSComparisonItemTypeSupermemoCourse;
     coursesItem.text = nil == self.selectedCourse ? @"Choose a Course to be compared" : @"Supermemo Courses";
-    coursesItem.detailText = nil == self.selectedCourse ? nil : [NSString stringWithFormat:@"count: %u", [courses count]];
+    coursesItem.detailText = nil == self.selectedCourse ? nil : [NSString stringWithFormat:@"count: %u", [self.courseItems count]];
     coursesItem.headerText = @"Supermemo";
     
     self.data = @[@[wordsItem], @[coursesItem]];
+}
+
+#pragma mark - Action
+
+- (void)compareButtonTapped:(UIButton *)sender
+{
+//    NSMutableArray *wordNames = [NSMutableArray array];
+//    [self.words enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        ETSWord *word = obj;
+//        if ([word.name length] > 0)
+//        {
+//            [wordNames addObject:word.name];
+//        }
+//    }];
+//    
+//    NSMutableArray *itemNames = [NSMutableArray array];
+//    [self.courseItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        ETSDBTEItems *item = obj;
+//        if ([item.Name length] > 0)
+//        {
+//            [itemNames addObject:item.Name];
+//        }
+//    }];
+    
+    NSMutableArray *result = [NSMutableArray array];
+    [self.words enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        ETSWord *word = obj;
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.Question LIKE %@", word.name];
+        NSArray *filtered = [self.courseItems filteredArrayUsingPredicate:predicate];
+        if (0 == [filtered count])
+        {
+            [result addObject:word];
+        }
+    }];
+    
+    NSLog(@"%@", result);
 }
 
 #pragma makr - Lifecycle
@@ -92,6 +153,16 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
     UIView *backgroundView = [[UIView alloc] initWithFrame:self.tableView.bounds];
     backgroundView.backgroundColor = self.tableView.backgroundColor;
     self.tableView.backgroundView = backgroundView;
+    
+    UIView *tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.bounds), 45)];
+    tableFooterView.backgroundColor = self.tableView.backgroundColor;
+    self.tableView.tableFooterView = tableFooterView;
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectInset(tableFooterView.bounds, 15, 0)];
+    button.backgroundColor = [UIColor purpleColor];
+    [button setTitle:@"Compare" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(compareButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [tableFooterView addSubview:button];
 }
 
 - (void)loadView
