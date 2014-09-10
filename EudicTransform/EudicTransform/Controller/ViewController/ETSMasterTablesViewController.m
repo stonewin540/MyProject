@@ -18,15 +18,30 @@
 
 @implementation ETSMasterTablesViewController
 
-- (NSArray *)dataFromTables
+- (void)resortData
 {
+    NSArray *data = [self.data sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        if ([obj1 isKindOfClass:[ETSDBTMaster class]] && [obj2 isKindOfClass:[ETSDBTMaster class]])
+        {
+            return [((ETSDBTMaster *)obj1).name compare:((ETSDBTMaster *)obj2).name options:NSCaseInsensitiveSearch];
+        }
+        else
+        {
+            return NSOrderedSame;
+        }
+    }];
     
+    self.data = data;
+}
+
+- (void)prepareData
+{
     NSArray *shownTables = @[ETSDBHelperTableCoursesName, ETSDBHelperTableItemsName];
     NSArray *tables = [[ETSDBHelper sharedInstance] selectFromMaster];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.name IN %@", shownTables];
     NSArray *filteredArray = [tables filteredArrayUsingPredicate:predicate];
-    return filteredArray;
+    self.data = filteredArray;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

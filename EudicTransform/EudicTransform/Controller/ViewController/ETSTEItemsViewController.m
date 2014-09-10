@@ -19,15 +19,15 @@
 
 @implementation ETSTEItemsViewController
 
-- (NSArray *)dataFromTables
+- (void)prepareData
 {
     if (self.isInitWithItems)
     {
-        return self.setedItems;
+        self.data = self.setedItems;
     }
     else
     {
-        return [[ETSDBHelper sharedInstance] selectFromItems];
+        self.data = [[ETSDBHelper sharedInstance] selectFromItems];
     }
 }
 

@@ -15,7 +15,7 @@
 		8E92497F19BAE29600D68F2D /* ETSDBTMaster.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E92497E19BAE29600D68F2D /* ETSDBTMaster.m */; };
 		8E9ABF9419BAF1D0004AF557 /* ETSMasterTablesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF8919BAF1D0004AF557 /* ETSMasterTablesViewController.m */; };
 		8E9ABF9519BAF1D0004AF557 /* ETSTableElementsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF8B19BAF1D0004AF557 /* ETSTableElementsBaseViewController.m */; };
-		8E9ABF9619BAF1D0004AF557 /* ETSTablesBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF8D19BAF1D0004AF557 /* ETSTablesBaseTableViewController.m */; };
+		8E9ABF9619BAF1D0004AF557 /* ETSBaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF8D19BAF1D0004AF557 /* ETSBaseTableViewController.m */; };
 		8E9ABF9719BAF1D0004AF557 /* ETSTECoursesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF8F19BAF1D0004AF557 /* ETSTECoursesViewController.m */; };
 		8E9ABF9819BAF1D0004AF557 /* ETSTEItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF9119BAF1D0004AF557 /* ETSTEItemsViewController.m */; };
 		8E9ABF9919BAF1D0004AF557 /* ETSWordsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9ABF9319BAF1D0004AF557 /* ETSWordsListViewController.m */; };
@@ -65,8 +65,8 @@
 		8E9ABF8919BAF1D0004AF557 /* ETSMasterTablesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSMasterTablesViewController.m; sourceTree = "<group>"; };
 		8E9ABF8A19BAF1D0004AF557 /* ETSTableElementsBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSTableElementsBaseViewController.h; sourceTree = "<group>"; };
 		8E9ABF8B19BAF1D0004AF557 /* ETSTableElementsBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSTableElementsBaseViewController.m; sourceTree = "<group>"; };
-		8E9ABF8C19BAF1D0004AF557 /* ETSTablesBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSTablesBaseTableViewController.h; sourceTree = "<group>"; };
-		8E9ABF8D19BAF1D0004AF557 /* ETSTablesBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSTablesBaseTableViewController.m; sourceTree = "<group>"; };
+		8E9ABF8C19BAF1D0004AF557 /* ETSBaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSBaseTableViewController.h; sourceTree = "<group>"; };
+		8E9ABF8D19BAF1D0004AF557 /* ETSBaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSBaseTableViewController.m; sourceTree = "<group>"; };
 		8E9ABF8E19BAF1D0004AF557 /* ETSTECoursesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSTECoursesViewController.h; sourceTree = "<group>"; };
 		8E9ABF8F19BAF1D0004AF557 /* ETSTECoursesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSTECoursesViewController.m; sourceTree = "<group>"; };
 		8E9ABF9019BAF1D0004AF557 /* ETSTEItemsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSTEItemsViewController.h; sourceTree = "<group>"; };
@@ -139,8 +139,8 @@
 				8E9ABF8919BAF1D0004AF557 /* ETSMasterTablesViewController.m */,
 				8E9ABF8A19BAF1D0004AF557 /* ETSTableElementsBaseViewController.h */,
 				8E9ABF8B19BAF1D0004AF557 /* ETSTableElementsBaseViewController.m */,
-				8E9ABF8C19BAF1D0004AF557 /* ETSTablesBaseTableViewController.h */,
-				8E9ABF8D19BAF1D0004AF557 /* ETSTablesBaseTableViewController.m */,
+				8E9ABF8C19BAF1D0004AF557 /* ETSBaseTableViewController.h */,
+				8E9ABF8D19BAF1D0004AF557 /* ETSBaseTableViewController.m */,
 				8E9ABF8E19BAF1D0004AF557 /* ETSTECoursesViewController.h */,
 				8E9ABF8F19BAF1D0004AF557 /* ETSTECoursesViewController.m */,
 				8E9ABF9019BAF1D0004AF557 /* ETSTEItemsViewController.h */,
@@ -366,7 +366,7 @@
 				8E9B6AB719A8528D00ED156D /* ETSWord.m in Sources */,
 				8E9B6A9019A8467600ED156D /* ETSAppDelegate.m in Sources */,
 				8E92497C19BADC9600D68F2D /* ETSDBTEItems.m in Sources */,
-				8E9ABF9619BAF1D0004AF557 /* ETSTablesBaseTableViewController.m in Sources */,
+				8E9ABF9619BAF1D0004AF557 /* ETSBaseTableViewController.m in Sources */,
 				8E9ABF9719BAF1D0004AF557 /* ETSTECoursesViewController.m in Sources */,
 				8E9ABF9919BAF1D0004AF557 /* ETSWordsListViewController.m in Sources */,
 				8E0AD07819B16891003B051E /* ETSDBTableElement.m in Sources */,

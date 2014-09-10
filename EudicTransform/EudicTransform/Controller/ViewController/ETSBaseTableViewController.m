@@ -6,54 +6,52 @@
 //  Copyright (c) 2014 stone win. All rights reserved.
 //
 
-#import "ETSTablesBaseTableViewController.h"
+#import "ETSBaseTableViewController.h"
 #import "ETSDBHelper.h"
 #import "ETSDBTMaster.h"
 
-@interface ETSTablesBaseTableViewController ()
+@interface ETSBaseTableViewController ()
 
 // UI
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation ETSTablesBaseTableViewController
-
-#pragma mark - Subclass
-
-- (NSArray *)dataFromTables
-{
-    return nil;
-}
+@implementation ETSBaseTableViewController
 
 #pragma mark - DB
 
+- (void)resortData
+{
+    self.data = self.data;
+}
+
 - (void)prepareData
+{
+    self.data = nil;
+}
+
+- (void)reloadTableView
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Loading…" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
     [alertView show];
     
-    NSArray *tables = [self dataFromTables];
-    self.data = tables;
-    [self.tableView reloadData];
-    
-    if ([tables count] > 0)
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self prepareData];
+        [self resortData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [alertView dismissWithClickedButtonIndex:0 animated:YES];
+        });
+    });
+}
+
+- (void)reloadTableViewIfNeeded
+{
+    if (0 == [self.data count])
     {
-        tables = [tables sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-            if ([obj1 isKindOfClass:[ETSDBTMaster class]] && [obj2 isKindOfClass:[ETSDBTMaster class]])
-            {
-                return [((ETSDBTMaster *)obj1).name compare:((ETSDBTMaster *)obj2).name options:NSCaseInsensitiveSearch];
-            }
-            else
-            {
-                return NSOrderedSame;
-            }
-        }];
-        self.data = tables;
-        [self.tableView reloadData];
+        [self reloadTableView];
     }
-    
-    [alertView dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 #pragma mark - Lifecycle
@@ -88,7 +86,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self prepareData];
+    [self reloadTableViewIfNeeded];
 }
 
 - (void)didReceiveMemoryWarning

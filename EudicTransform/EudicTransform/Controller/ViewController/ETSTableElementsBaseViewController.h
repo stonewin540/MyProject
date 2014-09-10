@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 stone win. All rights reserved.
 //
 
-#import "ETSTablesBaseTableViewController.h"
+#import "ETSBaseTableViewController.h"
 
-@interface ETSTableElementsBaseViewController : ETSTablesBaseTableViewController
+@interface ETSTableElementsBaseViewController : ETSBaseTableViewController
 
 @end

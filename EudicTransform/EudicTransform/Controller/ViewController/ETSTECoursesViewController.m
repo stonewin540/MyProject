@@ -17,9 +17,9 @@
 
 @implementation ETSTECoursesViewController
 
-- (NSArray *)dataFromTables
+- (void)prepareData
 {
-    return [[ETSDBHelper sharedInstance] selectFromCourses];
+    self.data = [[ETSDBHelper sharedInstance] selectFromCourses];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
