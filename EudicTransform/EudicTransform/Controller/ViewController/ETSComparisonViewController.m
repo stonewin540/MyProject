@@ -9,11 +9,20 @@
 #import "ETSComparisonViewController.h"
 #import "ETSParser.h"
 #import "ETSDBHelper.h"
+#import "ETSCoursesChooseViewController.h"
+#import "ETSDBTECourses.h"
+
+typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
+    ETSComparisonItemTypeEudicWords,
+    ETSComparisonItemTypeSupermemoCourse,
+};
 
 @interface ETSComparisonItem : NSObject
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, assign) NSUInteger count;
+@property (nonatomic, assign) ETSComparisonItemType type;
+@property (nonatomic, copy) NSString *text;
+@property (nonatomic, copy) NSString *detailText;
+@property (nonatomic, copy) NSString *headerText;
 
 @end
 
@@ -21,15 +30,13 @@
 
 @end
 
-//static const NSInteger kNumberOfSections = 2;
-static const NSInteger kNumberOfRows = 2;
-
-@interface ETSComparisonViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ETSComparisonViewController () <UITableViewDataSource, UITableViewDelegate, ETSCoursesChooseViewControllerDelegate>
 
 // UI
 @property (nonatomic, strong) UITableView *tableView;
 // data
 @property (nonatomic, strong) NSArray *data;
+@property (nonatomic, strong) ETSDBTECourses *selectedCourse;
 
 @end
 
@@ -42,15 +49,23 @@ static const NSInteger kNumberOfRows = 2;
     NSArray *words = nil;
     NSArray *courses = nil;
     words = [[ETSParser defaultParser] wordsFromHTMLString:[ETSParser eudicHTMLString]];
-    courses = [[ETSDBHelper sharedInstance] selectFromCourses];
+    if (nil != self.selectedCourse)
+    {
+        courses = [[ETSDBHelper sharedInstance] selectFromItemsWithCourseId:self.selectedCourse.CoursesId];
+    }
     
     ETSComparisonItem *wordsItem = [[ETSComparisonItem alloc] init];
-    wordsItem.name = @"words";
-    wordsItem.count = [words count];
+    wordsItem.type = ETSComparisonItemTypeEudicWords;
+    wordsItem.text = @"Eudic MyWords";
+    wordsItem.detailText = [NSString stringWithFormat:@"count: %u", [words count]];
+    wordsItem.headerText = @"Eudic";
     ETSComparisonItem *coursesItem = [[ETSComparisonItem alloc] init];
-    coursesItem.name = @"supermemo courses";
-    coursesItem.count = [courses count];
-    return @[wordsItem, coursesItem];
+    coursesItem.type = ETSComparisonItemTypeSupermemoCourse;
+    coursesItem.text = nil == self.selectedCourse ? @"Choose a Course to be compared" : @"Supermemo Courses";
+    coursesItem.detailText = nil == self.selectedCourse ? nil : [NSString stringWithFormat:@"count: %u", [courses count]];
+    coursesItem.headerText = @"Supermemo";
+    
+    return @[@[wordsItem], @[coursesItem]];
 }
 
 - (void)reloadTableView
@@ -85,7 +100,7 @@ static const NSInteger kNumberOfRows = 2;
     self.tableView.backgroundColor = self.view.backgroundColor;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.scrollEnabled = NO;
+//    self.tableView.scrollEnabled = NO;
     [self.view addSubview:self.tableView];
     
     UIView *backgroundView = [[UIView alloc] initWithFrame:self.tableView.bounds];
@@ -128,9 +143,14 @@ static const NSInteger kNumberOfRows = 2;
 
 #pragma mark - TableView DataSource
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [self.data count];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return kNumberOfRows;
+    return [self.data[section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -143,11 +163,54 @@ static const NSInteger kNumberOfRows = 2;
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
-    ETSComparisonItem *item = self.data[indexPath.row];
-    cell.textLabel.text = item.name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"count: %d", item.count];
+    NSArray *rows = self.data[indexPath.section];
+    ETSComparisonItem *item = rows[indexPath.row];
+    cell.textLabel.text = item.text;
+    cell.detailTextLabel.text = item.detailText;
     
     return cell;
+}
+
+#pragma mark - TableView Delegate
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    ETSComparisonItem *item = [self.data[section] firstObject];
+    return item.headerText;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return .1f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ETSComparisonItem *item = self.data[indexPath.section][indexPath.row];
+    switch (item.type)
+    {
+        case ETSComparisonItemTypeSupermemoCourse:
+        {
+            if (nil == self.selectedCourse)
+            {
+                ETSCoursesChooseViewController *controller = [[ETSCoursesChooseViewController alloc] init];
+                controller.delegate = self;
+                [self.navigationController pushViewController:controller animated:YES];
+            }
+        }
+            break;
+        case ETSComparisonItemTypeEudicWords:
+            break;
+    }
+}
+
+#pragma mark - CoursesChooseViewController Delegate
+
+- (void)coursesChooseViewController:(ETSCoursesChooseViewController *)controller didSelectCourse:(ETSDBTECourses *)course
+{
+    self.selectedCourse = course;
+    [self reloadTableView];
+    [controller.navigationController popViewControllerAnimated:YES];
 }
 
 @end

@@ -249,6 +249,8 @@
 
 @interface ETSParser ()
 
+@property (nonatomic, strong) NSArray *words;
+
 @end
 
 @implementation ETSParser
@@ -357,23 +359,28 @@
 
 - (NSArray *)wordsFromHTMLString:(NSString *)htmlString
 {
-    NSArray *wordStrings = [[ETSParser defaultParser] wordStringsFromHTMLString:htmlString];
-    if (nil == wordStrings)
+    if (0 == [self.words count])
     {
-        return nil;
+        NSArray *wordStrings = [[ETSParser defaultParser] wordStringsFromHTMLString:htmlString];
+        if (nil == wordStrings)
+        {
+            return nil;
+        }
+        
+        NSMutableArray *words = [NSMutableArray array];
+        
+        for (NSString *wordString in wordStrings)
+        {
+            NSArray *items = [ETSParser truncatedContentsFromHTMLString:wordString betweenPattern:@"<[/]*td.*?>"];
+            ETSWord *word = [[ETSWord alloc] init];
+            [word setWordHTMLStrings:items];
+            [words addObject:word];
+        }
+        
+        self.words = words;
     }
     
-    NSMutableArray *words = [NSMutableArray array];
-    
-    for (NSString *wordString in wordStrings)
-    {
-        NSArray *items = [ETSParser truncatedContentsFromHTMLString:wordString betweenPattern:@"<[/]*td.*?>"];
-        ETSWord *word = [[ETSWord alloc] init];
-        [word setWordHTMLStrings:items];
-        [words addObject:word];
-    }
-    
-    return words;
+    return self.words;
 }
 
 - (void)asyncWordsFromHTMLString:(NSString *)htmlString completionBlock:(void (^)(NSArray *))completion

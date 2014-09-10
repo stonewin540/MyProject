@@ -35,6 +35,7 @@
 		8E9B6AB719A8528D00ED156D /* ETSWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6AB619A8528D00ED156D /* ETSWord.m */; };
 		8E9B6ABA19A852DE00ED156D /* ETSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6AB919A852DE00ED156D /* ETSParser.m */; };
 		8E9B6AC019A9B8C000ED156D /* ETSDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6ABF19A9B8C000ED156D /* ETSDBHelper.m */; };
+		8EA5229A19C051C100F96155 /* ETSCoursesChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5229919C051C100F96155 /* ETSCoursesChooseViewController.m */; };
 		8ECAD4C519AB2CDC00ACDAC6 /* myWords.html in Resources */ = {isa = PBXBuildFile; fileRef = 8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,8 @@
 		8E9B6ABE19A9B8C000ED156D /* ETSDBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSDBHelper.h; sourceTree = "<group>"; };
 		8E9B6ABF19A9B8C000ED156D /* ETSDBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSDBHelper.m; sourceTree = "<group>"; };
 		8E9B6AC119A9B90100ED156D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		8EA5229819C051C100F96155 /* ETSCoursesChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSCoursesChooseViewController.h; sourceTree = "<group>"; };
+		8EA5229919C051C100F96155 /* ETSCoursesChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSCoursesChooseViewController.m; sourceTree = "<group>"; };
 		8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = myWords.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +131,8 @@
 		8E9ABF8719BAF1D0004AF557 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8EA5229819C051C100F96155 /* ETSCoursesChooseViewController.h */,
+				8EA5229919C051C100F96155 /* ETSCoursesChooseViewController.m */,
 				8E9ABF9A19BAF37C004AF557 /* ETSComparisonViewController.h */,
 				8E9ABF9B19BAF37C004AF557 /* ETSComparisonViewController.m */,
 				8E9ABF8819BAF1D0004AF557 /* ETSMasterTablesViewController.h */,
@@ -365,6 +370,7 @@
 				8E9ABF9719BAF1D0004AF557 /* ETSTECoursesViewController.m in Sources */,
 				8E9ABF9919BAF1D0004AF557 /* ETSWordsListViewController.m in Sources */,
 				8E0AD07819B16891003B051E /* ETSDBTableElement.m in Sources */,
+				8EA5229A19C051C100F96155 /* ETSCoursesChooseViewController.m in Sources */,
 				8E9B6ABA19A852DE00ED156D /* ETSParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
