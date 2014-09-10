@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 stone win. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ETSBaseTableViewController.h"
 
-@interface ETSComparisonViewController : UIViewController
+@interface ETSComparisonViewController : ETSBaseTableViewController
 
 @end

@@ -44,7 +44,7 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
 
 #pragma mark - Helper
 
-- (NSArray *)prepareData
+- (void)prepareData
 {
     NSArray *words = nil;
     NSArray *courses = nil;
@@ -65,21 +65,7 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
     coursesItem.detailText = nil == self.selectedCourse ? nil : [NSString stringWithFormat:@"count: %u", [courses count]];
     coursesItem.headerText = @"Supermemo";
     
-    return @[@[wordsItem], @[coursesItem]];
-}
-
-- (void)reloadTableView
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Loading…" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    [alertView show];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        self.data = [self prepareData];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [alertView dismissWithClickedButtonIndex:0 animated:YES];
-            [self.tableView reloadData];
-        });
-    });
+    self.data = @[@[wordsItem], @[coursesItem]];
 }
 
 #pragma makr - Lifecycle
@@ -118,10 +104,6 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (0 == [self.data count])
-    {
-        [self reloadTableView];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -191,12 +173,9 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
     {
         case ETSComparisonItemTypeSupermemoCourse:
         {
-            if (nil == self.selectedCourse)
-            {
-                ETSCoursesChooseViewController *controller = [[ETSCoursesChooseViewController alloc] init];
-                controller.delegate = self;
-                [self.navigationController pushViewController:controller animated:YES];
-            }
+            ETSCoursesChooseViewController *controller = [[ETSCoursesChooseViewController alloc] init];
+            controller.delegate = self;
+            [self.navigationController pushViewController:controller animated:YES];
         }
             break;
         case ETSComparisonItemTypeEudicWords:
