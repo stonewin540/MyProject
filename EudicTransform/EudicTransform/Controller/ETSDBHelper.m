@@ -215,7 +215,7 @@ static NSString *const kTableMaster = @"sqlite_master";
 {
 //    NSString *path = [[NSBundle mainBundle] pathForResource:kDBName ofType:@""];
 //    return path;
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *cachePath = [paths lastObject];
     return [cachePath stringByAppendingFormat:@"/%@", kDBName];
 }

@@ -82,12 +82,12 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
     ETSComparisonItem *wordsItem = [[ETSComparisonItem alloc] init];
     wordsItem.type = ETSComparisonItemTypeEudicWords;
     wordsItem.text = @"Eudic MyWords";
-    wordsItem.detailText = [NSString stringWithFormat:@"count: %u", [self.words count]];
+    wordsItem.detailText = [NSString stringWithFormat:@"count: %lu", (unsigned long)[self.words count]];
     wordsItem.headerText = @"Eudic";
     ETSComparisonItem *coursesItem = [[ETSComparisonItem alloc] init];
     coursesItem.type = ETSComparisonItemTypeSupermemoCourse;
     coursesItem.text = nil == self.selectedCourse ? @"Choose a Course to be compared" : @"Supermemo Courses";
-    coursesItem.detailText = nil == self.selectedCourse ? nil : [NSString stringWithFormat:@"count: %u", [self.courseItems count]];
+    coursesItem.detailText = nil == self.selectedCourse ? nil : [NSString stringWithFormat:@"count: %lu", (unsigned long)[self.courseItems count]];
     coursesItem.headerText = @"Supermemo";
     
     self.data = @[@[wordsItem], @[coursesItem]];
