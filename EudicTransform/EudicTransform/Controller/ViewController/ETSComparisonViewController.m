@@ -115,17 +115,21 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
 //        }
 //    }];
     
-    NSMutableArray *result = [NSMutableArray array];
-    [self.words enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        ETSWord *word = obj;
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.Question LIKE %@", word.name];
-        NSArray *filtered = [self.courseItems filteredArrayUsingPredicate:predicate];
-        if (0 == [filtered count])
-        {
-            [result addObject:word];
-        }
-    }];
+//    NSMutableArray *result = [NSMutableArray array];
+//    [self.words enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        ETSWord *word = obj;
+//        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.Question LIKE %@", word.name];
+//        NSArray *filtered = [self.courseItems filteredArrayUsingPredicate:predicate];
+//        if (0 == [filtered count])
+//        {
+//            [result addObject:word];
+//        }
+//    }];
+//    
+//    NSLog(@"%@", result);
     
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (name IN %@.Question)", self.courseItems];
+    NSArray *result = [self.words filteredArrayUsingPredicate:predicate];
     NSLog(@"%@", result);
 }
 

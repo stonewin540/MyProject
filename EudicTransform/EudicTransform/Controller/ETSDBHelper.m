@@ -213,11 +213,10 @@ static NSString *const kTableMaster = @"sqlite_master";
 
 - (NSString *)DBPath
 {
-//    NSString *path = [[NSBundle mainBundle] pathForResource:kDBName ofType:@""];
-//    return path;
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *cachePath = [paths lastObject];
-    return [cachePath stringByAppendingFormat:@"/%@", kDBName];
+    NSString *documentsPath = [paths lastObject];
+    documentsPath = [documentsPath stringByAppendingPathComponent:kDBName];
+    return documentsPath;
 }
 
 - (BOOL)open
