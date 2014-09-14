@@ -19,6 +19,28 @@
 
 @implementation ETSBaseTableViewController
 
+#pragma mark - Public
+
+- (void)alertViewOfLoadingWithAsyncProcessBlock:(void(^)(void))processBlock completionBlock:(void(^)(void))completionBlock
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Loading…" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
+    [alertView show];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        if (processBlock)
+        {
+            processBlock();
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (completionBlock)
+            {
+                completionBlock();
+            }
+            [alertView dismissWithClickedButtonIndex:0 animated:YES];
+        });
+    });
+}
+
 #pragma mark - DB
 
 - (void)resortData

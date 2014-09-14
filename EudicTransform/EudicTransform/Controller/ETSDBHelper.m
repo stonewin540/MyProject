@@ -389,7 +389,7 @@ static NSString *const kTableMaster = @"sqlite_master";
     }
     if ([word.desc length] > 0)
     {
-        [answer appendFormat:@"<br></br>%@", word.desc];
+        [answer appendFormat:@"<br></br>%@", [word.desc stringByReplacingOccurrencesOfString:@"&" withString:@"/"]];
     }
     
     

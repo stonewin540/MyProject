@@ -17,5 +17,6 @@
 - (void)prepareData;
 - (void)reloadTableView;
 - (void)reloadTableViewIfNeeded;
+- (void)alertViewOfLoadingWithAsyncProcessBlock:(void(^)(void))processBlock completionBlock:(void(^)(void))completionBlock;
 
 @end

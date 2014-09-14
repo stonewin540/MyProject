@@ -13,6 +13,7 @@
 #import "ETSDBTECourses.h"
 #import "ETSWord.h"
 #import "ETSDBTEItems.h"
+#import "UIAlertView+Blocks.h"
 
 typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
     ETSComparisonItemTypeEudicWords,
@@ -41,6 +42,7 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
 @property (nonatomic, strong) ETSDBTECourses *selectedCourse;
 @property (nonatomic, strong) NSArray *words;
 @property (nonatomic, strong) NSArray *courseItems;
+@property (nonatomic, strong) NSArray *differenceWords;
 
 @end
 
@@ -128,9 +130,40 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
 //    
 //    NSLog(@"%@", result);
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (name IN %@.Question)", self.courseItems];
-    NSArray *result = [self.words filteredArrayUsingPredicate:predicate];
-    NSLog(@"%@", result);
+    ETSComparisonViewController *__weak wself = self;
+    [self alertViewOfLoadingWithAsyncProcessBlock:^{
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"NOT (SELF.name IN %@.Question)", wself.courseItems];
+        wself.differenceWords = [wself.words filteredArrayUsingPredicate:predicate];
+    } completionBlock:^{
+        
+        RIButtonItem *confirmItem = [RIButtonItem itemWithLabel:@"OK" action:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+                
+                BOOL succeed = [[ETSDBHelper sharedInstance] appendWords:wself.differenceWords lastTableItem:[wself.courseItems lastObject]];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSString *title, *message;
+                    if (!succeed)
+                    {
+                        title = @"Failed";
+                        message = @"Sorry, appending failed!";
+                    }
+                    else
+                    {
+                        title = @"Congrats";
+                        message = @"Insertion successful!";
+                    }
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [alertView show];
+                });
+                
+            });
+        }];
+        
+        NSString *message = [NSString stringWithFormat:@"Appending %lu new words to supermemo DB?", (unsigned long)[wself.differenceWords count]];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Insertion" message:message cancelButtonItem:[RIButtonItem itemWithLabel:@"Cancel"] otherButtonItems:confirmItem, nil];
+        [alertView show];
+        
+    }];
 }
 
 #pragma makr - Lifecycle

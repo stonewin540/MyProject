@@ -36,6 +36,12 @@
 		8E9B6ABA19A852DE00ED156D /* ETSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6AB919A852DE00ED156D /* ETSParser.m */; };
 		8E9B6AC019A9B8C000ED156D /* ETSDBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9B6ABF19A9B8C000ED156D /* ETSDBHelper.m */; };
 		8EA5229A19C051C100F96155 /* ETSCoursesChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5229919C051C100F96155 /* ETSCoursesChooseViewController.m */; };
+		8EB925BF19C4841600C87AF5 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 8EB925B619C4841600C87AF5 /* LICENSE */; };
+		8EB925C119C4841600C87AF5 /* RIButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB925B919C4841600C87AF5 /* RIButtonItem.m */; };
+		8EB925C219C4841600C87AF5 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB925BB19C4841600C87AF5 /* UIActionSheet+Blocks.m */; };
+		8EB925C319C4841600C87AF5 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB925BD19C4841600C87AF5 /* UIAlertView+Blocks.m */; };
+		8EB925C419C4841600C87AF5 /* UIAlertView-Blocks.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8EB925BE19C4841600C87AF5 /* UIAlertView-Blocks.podspec */; };
+		8EB925C619C488A700C87AF5 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8EB925C519C488A700C87AF5 /* README.txt */; };
 		8ECAD4C519AB2CDC00ACDAC6 /* myWords.html in Resources */ = {isa = PBXBuildFile; fileRef = 8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +106,15 @@
 		8E9B6AC119A9B90100ED156D /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		8EA5229819C051C100F96155 /* ETSCoursesChooseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSCoursesChooseViewController.h; sourceTree = "<group>"; };
 		8EA5229919C051C100F96155 /* ETSCoursesChooseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSCoursesChooseViewController.m; sourceTree = "<group>"; };
+		8EB925B619C4841600C87AF5 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		8EB925B819C4841600C87AF5 /* RIButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RIButtonItem.h; sourceTree = "<group>"; };
+		8EB925B919C4841600C87AF5 /* RIButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RIButtonItem.m; sourceTree = "<group>"; };
+		8EB925BA19C4841600C87AF5 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		8EB925BB19C4841600C87AF5 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
+		8EB925BC19C4841600C87AF5 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		8EB925BD19C4841600C87AF5 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		8EB925BE19C4841600C87AF5 /* UIAlertView-Blocks.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UIAlertView-Blocks.podspec"; sourceTree = "<group>"; };
+		8EB925C519C488A700C87AF5 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = myWords.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -186,6 +201,7 @@
 		8E9B6A8519A8467600ED156D /* EudicTransform */ = {
 			isa = PBXGroup;
 			children = (
+				8EB925B419C4841600C87AF5 /* References */,
 				8E9B6AB319A8520D00ED156D /* Controller */,
 				8E9B6AB419A8520D00ED156D /* Model */,
 				8E9B6A8E19A8467600ED156D /* ETSAppDelegate.h */,
@@ -255,6 +271,30 @@
 				8E9B6AB619A8528D00ED156D /* ETSWord.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		8EB925B419C4841600C87AF5 /* References */ = {
+			isa = PBXGroup;
+			children = (
+				8EB925B519C4841600C87AF5 /* UIAlertView-Blocks-master */,
+			);
+			path = References;
+			sourceTree = "<group>";
+		};
+		8EB925B519C4841600C87AF5 /* UIAlertView-Blocks-master */ = {
+			isa = PBXGroup;
+			children = (
+				8EB925B619C4841600C87AF5 /* LICENSE */,
+				8EB925C519C488A700C87AF5 /* README.txt */,
+				8EB925B819C4841600C87AF5 /* RIButtonItem.h */,
+				8EB925B919C4841600C87AF5 /* RIButtonItem.m */,
+				8EB925BA19C4841600C87AF5 /* UIActionSheet+Blocks.h */,
+				8EB925BB19C4841600C87AF5 /* UIActionSheet+Blocks.m */,
+				8EB925BC19C4841600C87AF5 /* UIAlertView+Blocks.h */,
+				8EB925BD19C4841600C87AF5 /* UIAlertView+Blocks.m */,
+				8EB925BE19C4841600C87AF5 /* UIAlertView-Blocks.podspec */,
+			);
+			path = "UIAlertView-Blocks-master";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,7 +375,10 @@
 			files = (
 				8ECAD4C519AB2CDC00ACDAC6 /* myWords.html in Resources */,
 				8E9B6A8A19A8467600ED156D /* InfoPlist.strings in Resources */,
+				8EB925BF19C4841600C87AF5 /* LICENSE in Resources */,
 				8E9B6A9219A8467600ED156D /* Images.xcassets in Resources */,
+				8EB925C619C488A700C87AF5 /* README.txt in Resources */,
+				8EB925C419C4841600C87AF5 /* UIAlertView-Blocks.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E9B6AC019A9B8C000ED156D /* ETSDBHelper.m in Sources */,
+				8EB925C219C4841600C87AF5 /* UIActionSheet+Blocks.m in Sources */,
 				8E92497F19BAE29600D68F2D /* ETSDBTMaster.m in Sources */,
 				8E9ABF9519BAF1D0004AF557 /* ETSTableElementsBaseViewController.m in Sources */,
 				8E9ABF9819BAF1D0004AF557 /* ETSTEItemsViewController.m in Sources */,
@@ -365,9 +409,11 @@
 				8E9ABF9419BAF1D0004AF557 /* ETSMasterTablesViewController.m in Sources */,
 				8E9B6AB719A8528D00ED156D /* ETSWord.m in Sources */,
 				8E9B6A9019A8467600ED156D /* ETSAppDelegate.m in Sources */,
+				8EB925C119C4841600C87AF5 /* RIButtonItem.m in Sources */,
 				8E92497C19BADC9600D68F2D /* ETSDBTEItems.m in Sources */,
 				8E9ABF9619BAF1D0004AF557 /* ETSBaseTableViewController.m in Sources */,
 				8E9ABF9719BAF1D0004AF557 /* ETSTECoursesViewController.m in Sources */,
+				8EB925C319C4841600C87AF5 /* UIAlertView+Blocks.m in Sources */,
 				8E9ABF9919BAF1D0004AF557 /* ETSWordsListViewController.m in Sources */,
 				8E0AD07819B16891003B051E /* ETSDBTableElement.m in Sources */,
 				8EA5229A19C051C100F96155 /* ETSCoursesChooseViewController.m in Sources */,
