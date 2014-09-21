@@ -42,6 +42,10 @@
 		8EB925C319C4841600C87AF5 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB925BD19C4841600C87AF5 /* UIAlertView+Blocks.m */; };
 		8EB925C419C4841600C87AF5 /* UIAlertView-Blocks.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8EB925BE19C4841600C87AF5 /* UIAlertView-Blocks.podspec */; };
 		8EB925C619C488A700C87AF5 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8EB925C519C488A700C87AF5 /* README.txt */; };
+		8EC6D7B819CF122800E7A207 /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6D7B419CF122800E7A207 /* HTMLNode.m */; };
+		8EC6D7B919CF122800E7A207 /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6D7B619CF122800E7A207 /* HTMLParser.m */; };
+		8EC6D7BA19CF122800E7A207 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6D7B719CF122800E7A207 /* README.md */; };
+		8EC6D7BD19CF13D100E7A207 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC6D7BB19CF126500E7A207 /* libxml2.dylib */; };
 		8ECAD4C519AB2CDC00ACDAC6 /* myWords.html in Resources */ = {isa = PBXBuildFile; fileRef = 8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */; };
 /* End PBXBuildFile section */
 
@@ -115,6 +119,12 @@
 		8EB925BD19C4841600C87AF5 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		8EB925BE19C4841600C87AF5 /* UIAlertView-Blocks.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UIAlertView-Blocks.podspec"; sourceTree = "<group>"; };
 		8EB925C519C488A700C87AF5 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		8EC6D7B319CF122800E7A207 /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
+		8EC6D7B419CF122800E7A207 /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
+		8EC6D7B519CF122800E7A207 /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
+		8EC6D7B619CF122800E7A207 /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
+		8EC6D7B719CF122800E7A207 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8EC6D7BB19CF126500E7A207 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = myWords.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EC6D7BD19CF13D100E7A207 /* libxml2.dylib in Frameworks */,
 				8E0AD07C19B17B80003B051E /* libsqlite3.dylib in Frameworks */,
 				8E9B6A8219A8467600ED156D /* CoreGraphics.framework in Frameworks */,
 				8E9B6A8419A8467600ED156D /* UIKit.framework in Frameworks */,
@@ -188,6 +199,7 @@
 		8E9B6A7E19A8467600ED156D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8EC6D7BB19CF126500E7A207 /* libxml2.dylib */,
 				8E0AD07919B179DA003B051E /* libsqlite3.0.dylib */,
 				8E9B6AC119A9B90100ED156D /* libsqlite3.dylib */,
 				8E9B6A7F19A8467600ED156D /* Foundation.framework */,
@@ -276,6 +288,7 @@
 		8EB925B419C4841600C87AF5 /* References */ = {
 			isa = PBXGroup;
 			children = (
+				8EC6D7B219CF122800E7A207 /* Objective-C-HMTL-Parser-master */,
 				8EB925B519C4841600C87AF5 /* UIAlertView-Blocks-master */,
 			);
 			path = References;
@@ -295,6 +308,18 @@
 				8EB925BE19C4841600C87AF5 /* UIAlertView-Blocks.podspec */,
 			);
 			path = "UIAlertView-Blocks-master";
+			sourceTree = "<group>";
+		};
+		8EC6D7B219CF122800E7A207 /* Objective-C-HMTL-Parser-master */ = {
+			isa = PBXGroup;
+			children = (
+				8EC6D7B319CF122800E7A207 /* HTMLNode.h */,
+				8EC6D7B419CF122800E7A207 /* HTMLNode.m */,
+				8EC6D7B519CF122800E7A207 /* HTMLParser.h */,
+				8EC6D7B619CF122800E7A207 /* HTMLParser.m */,
+				8EC6D7B719CF122800E7A207 /* README.md */,
+			);
+			path = "Objective-C-HMTL-Parser-master";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,7 +426,9 @@
 				8EB925C219C4841600C87AF5 /* UIActionSheet+Blocks.m in Sources */,
 				8E92497F19BAE29600D68F2D /* ETSDBTMaster.m in Sources */,
 				8E9ABF9519BAF1D0004AF557 /* ETSTableElementsBaseViewController.m in Sources */,
+				8EC6D7B819CF122800E7A207 /* HTMLNode.m in Sources */,
 				8E9ABF9819BAF1D0004AF557 /* ETSTEItemsViewController.m in Sources */,
+				8EC6D7BA19CF122800E7A207 /* README.md in Sources */,
 				8E0AD07F19B18296003B051E /* ETSDBTable.m in Sources */,
 				8E9B6A8C19A8467600ED156D /* main.m in Sources */,
 				8E0AD08519B19D1F003B051E /* ETSDBTECourses.m in Sources */,
@@ -418,6 +445,7 @@
 				8E0AD07819B16891003B051E /* ETSDBTableElement.m in Sources */,
 				8EA5229A19C051C100F96155 /* ETSCoursesChooseViewController.m in Sources */,
 				8E9B6ABA19A852DE00ED156D /* ETSParser.m in Sources */,
+				8EC6D7B919CF122800E7A207 /* HTMLParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +564,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EudicTransform/EudicTransform-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = "EudicTransform/EudicTransform-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -549,6 +582,11 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EudicTransform/EudicTransform-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					/usr/include/libxml2,
+				);
 				INFOPLIST_FILE = "EudicTransform/EudicTransform-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

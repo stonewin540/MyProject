@@ -9,6 +9,7 @@
 #import "ETSParser.h"
 #import "ETSWord.h"
 #import <pthread/pthread.h>
+#import "HTMLParser.h"
 
 @implementation NSRegularExpression (ETParser)
 
@@ -251,6 +252,7 @@
 @interface ETSParser ()
 
 @property (nonatomic, strong) NSArray *words;
+@property (nonatomic, strong) HTMLParser *htmlParser;
 
 @end
 
@@ -265,6 +267,13 @@
     if (self)
     {
         pthread_mutex_init(&_lock, NULL);
+        NSError *error = nil;
+        self.htmlParser = [[HTMLParser alloc] initWithString:[ETSParser eudicHTMLString] error:&error];
+        if (nil != error)
+        {
+            self.htmlParser = nil;
+            NSLog(@"%s init HTML parser error:\n\t%@", __func__, error);
+        }
     }
     return self;
 }
@@ -284,28 +293,67 @@
     return parser;
 }
 
+- (void)searchIn:(HTMLNode *)node
+{
+    NSArray *children = [node children];
+    NSUInteger childrenCount = [children count];
+    if (childrenCount > 1)
+    {
+        for (HTMLNode *subnode in children)
+        {
+            [self searchIn:subnode];
+        }
+    }
+    else
+    {
+        if (0 != childrenCount)
+        {
+            HTMLNode *node = [children lastObject];
+            NSLog(@"contents: %@, all: %@, raw: %@", [node contents], [node allContents], [node rawContents]);
+        }
+    }
+}
+
 - (NSArray *)wordsFromHTMLString:(NSString *)htmlString
 {
     pthread_mutex_lock(&_lock);
     if (0 == [self.words count])
     {
-        NSArray *wordStrings = [ETSParser wordStringsFromHTMLString:htmlString];
-        if (nil == wordStrings)
+//        NSArray *wordStrings = [ETSParser wordStringsFromHTMLString:htmlString];
+//        if (nil == wordStrings)
+//        {
+//            return nil;
+//        }
+//        
+//        NSMutableArray *words = [NSMutableArray array];
+//        
+//        for (NSString *wordString in wordStrings)
+//        {
+//            NSArray *items = [ETSParser truncatedContentsFromHTMLString:wordString betweenPattern:@"<[/]*td.*?>"];
+//            ETSWord *word = [[ETSWord alloc] init];
+//            [word setWordHTMLStrings:items];
+//            [words addObject:word];
+//        }
+//        
+//        self.words = words;
+        
+        static NSString *const kTableTag = @"table";
+        static NSString *const kTBodyTag = @"tbody";
+        static NSString *const kTrTag = @"tr";
+        static NSString *const kTdTag = @"td";
+        
+        HTMLNode *bodyNode = [self.htmlParser body];
+        HTMLNode *tableNode = [bodyNode findChildTag:kTableTag];
+        HTMLNode *tbodyNode = [tableNode findChildTag:kTBodyTag];
+        NSArray *trNodes = [tbodyNode findChildTags:kTrTag];
+        for (HTMLNode *node in trNodes)
         {
-            return nil;
+            NSArray *tdNodes = [node findChildTags:kTdTag];
+            for (HTMLNode *subnode in tdNodes)
+            {
+                [self searchIn:subnode];
+            }
         }
-        
-        NSMutableArray *words = [NSMutableArray array];
-        
-        for (NSString *wordString in wordStrings)
-        {
-            NSArray *items = [ETSParser truncatedContentsFromHTMLString:wordString betweenPattern:@"<[/]*td.*?>"];
-            ETSWord *word = [[ETSWord alloc] init];
-            [word setWordHTMLStrings:items];
-            [words addObject:word];
-        }
-        
-        self.words = words;
     }
     pthread_mutex_unlock(&_lock);
     
