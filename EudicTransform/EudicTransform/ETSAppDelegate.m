@@ -11,6 +11,7 @@
 #import "ETSDBHelper.h"
 #import "ETSMasterTablesViewController.h"
 #import "ETSComparisonViewController.h"
+#import "ETSParser.h"
 
 @implementation ETSAppDelegate
 
@@ -53,6 +54,7 @@
     
     // prepare DB
     [[ETSDBHelper sharedInstance] open];
+    [[ETSParser defaultParser] asyncLoadWords];
     
     ETSWordsListViewController *wordsController = [[ETSWordsListViewController alloc] init];
     UINavigationController *wordsNavigationController = [[UINavigationController alloc] initWithRootViewController:wordsController];

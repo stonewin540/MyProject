@@ -8,6 +8,7 @@
 
 #import "ETSParser.h"
 #import "ETSWord.h"
+#import <pthread/pthread.h>
 
 @implementation NSRegularExpression (ETParser)
 
@@ -254,6 +255,24 @@
 @end
 
 @implementation ETSParser
+{
+    pthread_mutex_t _lock;
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self)
+    {
+        pthread_mutex_init(&_lock, NULL);
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    pthread_mutex_destroy(&_lock);
+}
 
 + (NSString *)eudicHTMLString
 {
@@ -359,6 +378,7 @@
 
 - (NSArray *)wordsFromHTMLString:(NSString *)htmlString
 {
+    pthread_mutex_lock(&_lock);
     if (0 == [self.words count])
     {
         NSArray *wordStrings = [[ETSParser defaultParser] wordStringsFromHTMLString:htmlString];
@@ -379,6 +399,7 @@
         
         self.words = words;
     }
+    pthread_mutex_unlock(&_lock);
     
     return self.words;
 }
@@ -391,6 +412,13 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(word);
         });
+    });
+}
+
+- (void)asyncLoadWords
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self wordsFromHTMLString:[ETSParser eudicHTMLString]];
     });
 }
 

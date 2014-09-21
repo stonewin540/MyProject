@@ -49,5 +49,6 @@
  @param completion 完成是的回调block
  */
 - (void)asyncWordsFromHTMLString:(NSString *)htmlString completionBlock:(void (^)(NSArray *words))completion;
+- (void)asyncLoadWords;
 
 @end
