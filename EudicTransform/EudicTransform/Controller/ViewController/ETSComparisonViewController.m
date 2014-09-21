@@ -136,11 +136,16 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
         wself.differenceWords = [wself.words filteredArrayUsingPredicate:predicate];
     } completionBlock:^{
         
-        RIButtonItem *confirmItem = [RIButtonItem itemWithLabel:@"OK" action:^{
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSUInteger differenceCount = [wself.differenceWords count];
+        if (differenceCount > 0)
+        {
+            RIButtonItem *confirmItem = [RIButtonItem itemWithLabel:@"OK" action:^{
                 
-                BOOL succeed = [[ETSDBHelper sharedInstance] appendWords:wself.differenceWords lastTableItem:[wself.courseItems lastObject]];
-                dispatch_async(dispatch_get_main_queue(), ^{
+                __block BOOL succeed = NO;
+                [wself alertViewOfLoadingWithAsyncProcessBlock:^{
+                    succeed = [[ETSDBHelper sharedInstance] appendWords:wself.differenceWords lastTableItem:[wself.courseItems lastObject]];
+                } completionBlock:^{
+                    
                     NSString *title, *message;
                     if (!succeed)
                     {
@@ -154,14 +159,20 @@ typedef NS_ENUM(NSUInteger, ETSComparisonItemType) {
                     }
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [alertView show];
-                });
+                    
+                }];
                 
-            });
-        }];
-        
-        NSString *message = [NSString stringWithFormat:@"Appending %lu new words to supermemo DB?", (unsigned long)[wself.differenceWords count]];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Insertion" message:message cancelButtonItem:[RIButtonItem itemWithLabel:@"Cancel"] otherButtonItems:confirmItem, nil];
-        [alertView show];
+            }];
+            
+            NSString *message = [NSString stringWithFormat:@"Appending %lu new words to supermemo DB?", (unsigned long)differenceCount];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Insertion" message:message cancelButtonItem:[RIButtonItem itemWithLabel:@"Cancel"] otherButtonItems:confirmItem, nil];
+            [alertView show];
+        }
+        else
+        {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Nothing difference for appending" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertView show];
+        }
         
     }];
 }
