@@ -274,6 +274,66 @@
     pthread_mutex_destroy(&_lock);
 }
 
++ (instancetype)defaultParser
+{
+    static ETSParser *parser;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        parser = [[ETSParser alloc] init];
+    });
+    return parser;
+}
+
+- (NSArray *)wordsFromHTMLString:(NSString *)htmlString
+{
+    pthread_mutex_lock(&_lock);
+    if (0 == [self.words count])
+    {
+        NSArray *wordStrings = [ETSParser wordStringsFromHTMLString:htmlString];
+        if (nil == wordStrings)
+        {
+            return nil;
+        }
+        
+        NSMutableArray *words = [NSMutableArray array];
+        
+        for (NSString *wordString in wordStrings)
+        {
+            NSArray *items = [ETSParser truncatedContentsFromHTMLString:wordString betweenPattern:@"<[/]*td.*?>"];
+            ETSWord *word = [[ETSWord alloc] init];
+            [word setWordHTMLStrings:items];
+            [words addObject:word];
+        }
+        
+        self.words = words;
+    }
+    pthread_mutex_unlock(&_lock);
+    
+    return self.words;
+}
+
+- (void)asyncWordsFromHTMLString:(NSString *)htmlString completionBlock:(void (^)(NSArray *))completion
+{
+    ETSParser *__weak wself = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        NSArray *word = [wself wordsFromHTMLString:htmlString];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(word);
+        });
+    });
+}
+
+- (void)asyncLoadWords
+{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+        [self wordsFromHTMLString:[ETSParser eudicHTMLString]];
+    });
+}
+
+@end
+
+@implementation ETSParser (Helper)
+
 + (NSString *)eudicHTMLString
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"myWords" ofType:@"html"];
@@ -288,16 +348,6 @@
     }
     
     return nil;
-}
-
-+ (instancetype)defaultParser
-{
-    static ETSParser *parser;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        parser = [[ETSParser alloc] init];
-    });
-    return parser;
 }
 
 + (NSArray *)truncatedContentsFromHTMLString:(NSString *)htmlString betweenPattern:(NSString *)pattern
@@ -345,7 +395,7 @@
     return [ETSParser truncatedContentsFromHTMLString:htmlString betweenPattern:[NSString stringWithFormat:@"<.*?%@>", tag]];
 }
 
-- (NSArray *)wordStringsFromHTMLString:(NSString *)htmlString
++ (NSArray *)wordStringsFromHTMLString:(NSString *)htmlString
 {
     static NSString *const kTBodyTag = @"tbody";
     static NSString *const kTrTag = @"tr";
@@ -374,52 +424,6 @@
     }
     
     return wordStrings;
-}
-
-- (NSArray *)wordsFromHTMLString:(NSString *)htmlString
-{
-    pthread_mutex_lock(&_lock);
-    if (0 == [self.words count])
-    {
-        NSArray *wordStrings = [[ETSParser defaultParser] wordStringsFromHTMLString:htmlString];
-        if (nil == wordStrings)
-        {
-            return nil;
-        }
-        
-        NSMutableArray *words = [NSMutableArray array];
-        
-        for (NSString *wordString in wordStrings)
-        {
-            NSArray *items = [ETSParser truncatedContentsFromHTMLString:wordString betweenPattern:@"<[/]*td.*?>"];
-            ETSWord *word = [[ETSWord alloc] init];
-            [word setWordHTMLStrings:items];
-            [words addObject:word];
-        }
-        
-        self.words = words;
-    }
-    pthread_mutex_unlock(&_lock);
-    
-    return self.words;
-}
-
-- (void)asyncWordsFromHTMLString:(NSString *)htmlString completionBlock:(void (^)(NSArray *))completion
-{
-    ETSParser *__weak wself = self;
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        NSArray *word = [wself wordsFromHTMLString:htmlString];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            completion(word);
-        });
-    });
-}
-
-- (void)asyncLoadWords
-{
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [self wordsFromHTMLString:[ETSParser eudicHTMLString]];
-    });
 }
 
 @end

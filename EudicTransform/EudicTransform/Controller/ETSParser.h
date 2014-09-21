@@ -13,25 +13,7 @@
  */
 @interface ETSParser : NSObject
 
-+ (NSString *)eudicHTMLString;
 + (instancetype)defaultParser;
-/**
- 获取pattern之间的字符串
- 
- @return 字符串数组
- @param htmlString 字符串形式的HTML数据
- @param pattern 正则表达式
- */
-+ (NSArray *)truncatedContentsFromHTMLString:(NSString *)htmlString betweenPattern:(NSString *)pattern;
-/**
- 获取<tag></tag>之间的字符串
- 
- @return 字符串数组
- @param htmlString 字符串形式的HTML数据
- @param tag 要截取内容的tag名
- */
-+ (NSArray *)truncatedContentsFromHTMLString:(NSString *)htmlString betweenTag:(NSString *)tag;
-- (NSArray *)wordStringsFromHTMLString:(NSString *)htmlString;
 /**
  通过欧陆词典的HTML数据获得单词模型数组
  
@@ -50,5 +32,28 @@
  */
 - (void)asyncWordsFromHTMLString:(NSString *)htmlString completionBlock:(void (^)(NSArray *words))completion;
 - (void)asyncLoadWords;
+
+@end
+
+@interface ETSParser (Helper)
+
++ (NSString *)eudicHTMLString;
+/**
+ 获取pattern之间的字符串
+ 
+ @return 字符串数组
+ @param htmlString 字符串形式的HTML数据
+ @param pattern 正则表达式
+ */
++ (NSArray *)truncatedContentsFromHTMLString:(NSString *)htmlString betweenPattern:(NSString *)pattern;
+/**
+ 获取<tag></tag>之间的字符串
+ 
+ @return 字符串数组
+ @param htmlString 字符串形式的HTML数据
+ @param tag 要截取内容的tag名
+ */
++ (NSArray *)truncatedContentsFromHTMLString:(NSString *)htmlString betweenTag:(NSString *)tag;
++ (NSArray *)wordStringsFromHTMLString:(NSString *)htmlString;
 
 @end
