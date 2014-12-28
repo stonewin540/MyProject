@@ -10,4 +10,6 @@
 
 @interface ETSWordsListViewController : UIViewController
 
+@property (nonatomic, strong) NSArray *words;
+
 @end

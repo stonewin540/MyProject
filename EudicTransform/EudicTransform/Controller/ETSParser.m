@@ -10,6 +10,7 @@
 #import "ETSWord.h"
 #import <pthread/pthread.h>
 #import "HTMLParser.h"
+#import "ETSNewWord.h"
 
 @implementation NSRegularExpression (ETParser)
 
@@ -340,7 +341,9 @@
         static NSString *const kTableTag = @"table";
         static NSString *const kTBodyTag = @"tbody";
         static NSString *const kTrTag = @"tr";
-        static NSString *const kTdTag = @"td";
+//        static NSString *const kTdTag = @"td";
+        
+        NSMutableArray *words = [NSMutableArray array];
         
         HTMLNode *bodyNode = [self.htmlParser body];
         HTMLNode *tableNode = [bodyNode findChildTag:kTableTag];
@@ -348,12 +351,14 @@
         NSArray *trNodes = [tbodyNode findChildTags:kTrTag];
         for (HTMLNode *node in trNodes)
         {
-            NSArray *tdNodes = [node findChildTags:kTdTag];
-            for (HTMLNode *subnode in tdNodes)
+            ETSNewWord *word = [[ETSNewWord alloc] initWithHtmlNode:node];
+            if (word)
             {
-                [self searchIn:subnode];
+                [words addObject:word];
             }
         }
+        
+        self.words = words;
     }
     pthread_mutex_unlock(&_lock);
     
@@ -371,11 +376,12 @@
     });
 }
 
-- (void)asyncLoadWords
+- (void)asyncLoadWordsWithCompletion:(void (^)(NSArray *))completion
 {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-        [self wordsFromHTMLString:[ETSParser eudicHTMLString]];
-    });
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//        [self wordsFromHTMLString:[ETSParser eudicHTMLString]];
+//    });
+    [self asyncWordsFromHTMLString:[ETSParser eudicHTMLString] completionBlock:completion];
 }
 
 @end

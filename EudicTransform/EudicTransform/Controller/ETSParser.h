@@ -13,6 +13,8 @@
  */
 @interface ETSParser : NSObject
 
+@property (nonatomic, strong, readonly) NSArray *words;
+
 + (instancetype)defaultParser;
 /**
  通过欧陆词典的HTML数据获得单词模型数组
@@ -31,7 +33,7 @@
  @param completion 完成是的回调block
  */
 - (void)asyncWordsFromHTMLString:(NSString *)htmlString completionBlock:(void (^)(NSArray *words))completion;
-- (void)asyncLoadWords;
+- (void)asyncLoadWordsWithCompletion:(void(^)(NSArray *word))completion;
 
 @end
 

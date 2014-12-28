@@ -7,8 +7,37 @@
 //
 
 #import "ETSWordsListViewController.h"
-#import "ETSWord.h"
-#import "ETSParser.h"
+#import "ETSNewWord.h"
+
+#define FONT_CELL_DETAILTEXTLABEL [UIFont systemFontOfSize:10]
+@implementation UITableViewCell (ETSWordsListViewController)
+
+- (void)setWord:(ETSNewWord *)word {
+    self.textLabel.text = [NSString stringWithFormat:@"%@. %@", word.serialNumber, word.word];
+    
+    self.detailTextLabel.textColor = [UIColor grayColor];
+    self.detailTextLabel.font = FONT_CELL_DETAILTEXTLABEL;
+    self.detailTextLabel.text = word.content;
+    self.detailTextLabel.numberOfLines = 0;
+}
+
++ (CGFloat)heightOfWord:(ETSNewWord *)word {
+    static const UIEdgeInsets kInset = {10, 0, 10, 0};
+    static const CGFloat kGap = 5;
+    static UIFont *textFont;
+    if (!textFont)
+    {
+        textFont = [UIFont systemFontOfSize:17];
+    }
+    
+    CGFloat textHeight = ceilf(textFont.lineHeight);
+    CGFloat detailTextHeight = ceilf([word.content sizeWithFont:FONT_CELL_DETAILTEXTLABEL constrainedToSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), CGFLOAT_MAX)].height);
+    CGFloat height = kInset.top + kInset.bottom + kGap;
+    height += textHeight + detailTextHeight;
+    return height;
+}
+
+@end
 
 @interface ETSWordsListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -21,22 +50,13 @@
 
 @implementation ETSWordsListViewController
 
-#pragma mark - Helper
+- (void)setWords:(NSArray *)words {
+    self.data = [words mutableCopy];
+    [self.tableView reloadData];
+}
 
-- (NSString *)eudicHTMLString
-{
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"myWords" ofType:@"html"];
-    if ([path length] > 0)
-    {
-        NSError *error = nil;
-        NSString *string = [[NSString alloc] initWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&error];
-        if (nil == error)
-        {
-            return string;
-        }
-    }
-    
-    return nil;
+- (NSArray *)words {
+    return self.data;
 }
 
 #pragma mark - Lifecycle
@@ -62,22 +82,6 @@
     [self.view addSubview:self.tableView];
 }
 
-- (void)asyncReloadWords
-{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Loading…" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil, nil];
-    [alertView show];
-    
-    ETSWordsListViewController *__weak wself = self;
-    [[ETSParser defaultParser] asyncWordsFromHTMLString:[wself eudicHTMLString] completionBlock:^(NSArray *words) {
-        
-        [alertView dismissWithClickedButtonIndex:0 animated:YES];
-        [wself.data removeAllObjects];
-        [wself.data addObjectsFromArray:words];
-        [wself.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
-        
-    }];
-}
-
 - (void)loadView
 {
     self.view = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
@@ -88,7 +92,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self asyncReloadWords];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,32 +113,6 @@
 
 #pragma mark - TableView Delegate
 
-- (NSString *)detailStringWithWord:(ETSWord *)word
-{
-    NSMutableString *detailText = [NSMutableString string];
-    
-    [detailText appendString:@"uk "];
-    if ([word.phoneticUK length] > 0)
-    {
-        [detailText appendString:word.phoneticUK];
-    }
-    [detailText appendString:@"us "];
-    if ([word.phoneticUS length] > 0)
-    {
-        [detailText appendString:word.phoneticUS];
-    }
-    if ([word.remark length] > 0)
-    {
-        [detailText appendFormat:@"\n\nremark:\n%@", [word.remark stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
-    }
-    if ([word.desc length] > 0)
-    {
-        [detailText appendFormat:@"\n\n%@", [word.desc stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];
-    }
-    
-    return [detailText copy];
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.data count];
@@ -150,12 +127,7 @@
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    
-    ETSWord *word = self.data[indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@. %@", word.wordId, word.name];
-    cell.detailTextLabel.textColor = [UIColor grayColor];
-    cell.detailTextLabel.text = [self detailStringWithWord:word];
-    cell.detailTextLabel.numberOfLines = 0;
+    [cell setWord:self.data[indexPath.row]];
     
     return cell;
 }
@@ -164,15 +136,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ETSWord *word = self.data[indexPath.row];
-    if ([word.desc length] > 0)
-    {
-        return 44 + ceilf([[self detailStringWithWord:word] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:12]}].height);
-    }
-    else
-    {
-        return 44;
-    }
+    return [UITableViewCell heightOfWord:self.data[indexPath.row]];
 }
 
 @end

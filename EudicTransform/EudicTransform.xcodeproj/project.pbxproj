@@ -42,11 +42,12 @@
 		8EB925C319C4841600C87AF5 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EB925BD19C4841600C87AF5 /* UIAlertView+Blocks.m */; };
 		8EB925C419C4841600C87AF5 /* UIAlertView-Blocks.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 8EB925BE19C4841600C87AF5 /* UIAlertView-Blocks.podspec */; };
 		8EB925C619C488A700C87AF5 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8EB925C519C488A700C87AF5 /* README.txt */; };
+		8EBF31031A4E9D32003BC91E /* ETSNewWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EBF31021A4E9D32003BC91E /* ETSNewWord.m */; };
+		8EBF31051A4FF38E003BC91E /* myWords.html in Resources */ = {isa = PBXBuildFile; fileRef = 8EBF31041A4FF38E003BC91E /* myWords.html */; };
 		8EC6D7B819CF122800E7A207 /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6D7B419CF122800E7A207 /* HTMLNode.m */; };
 		8EC6D7B919CF122800E7A207 /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6D7B619CF122800E7A207 /* HTMLParser.m */; };
 		8EC6D7BA19CF122800E7A207 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6D7B719CF122800E7A207 /* README.md */; };
 		8EC6D7BD19CF13D100E7A207 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EC6D7BB19CF126500E7A207 /* libxml2.dylib */; };
-		8ECAD4C519AB2CDC00ACDAC6 /* myWords.html in Resources */ = {isa = PBXBuildFile; fileRef = 8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,13 +120,15 @@
 		8EB925BD19C4841600C87AF5 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		8EB925BE19C4841600C87AF5 /* UIAlertView-Blocks.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "UIAlertView-Blocks.podspec"; sourceTree = "<group>"; };
 		8EB925C519C488A700C87AF5 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		8EBF31011A4E9D32003BC91E /* ETSNewWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ETSNewWord.h; sourceTree = "<group>"; };
+		8EBF31021A4E9D32003BC91E /* ETSNewWord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ETSNewWord.m; sourceTree = "<group>"; };
+		8EBF31041A4FF38E003BC91E /* myWords.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = myWords.html; sourceTree = "<group>"; };
 		8EC6D7B319CF122800E7A207 /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
 		8EC6D7B419CF122800E7A207 /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
 		8EC6D7B519CF122800E7A207 /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
 		8EC6D7B619CF122800E7A207 /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
 		8EC6D7B719CF122800E7A207 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8EC6D7BB19CF126500E7A207 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
-		8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = myWords.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,8 +219,8 @@
 				8EB925B419C4841600C87AF5 /* References */,
 				8E9B6AB319A8520D00ED156D /* Controller */,
 				8E9B6AB419A8520D00ED156D /* Model */,
+				8EBF31041A4FF38E003BC91E /* myWords.html */,
 				8E9B6A8E19A8467600ED156D /* ETSAppDelegate.h */,
-				8ECAD4C419AB2CDC00ACDAC6 /* myWords.html */,
 				8E9B6A8F19A8467600ED156D /* ETSAppDelegate.m */,
 				8E9B6A9119A8467600ED156D /* Images.xcassets */,
 				8E9B6A8619A8467600ED156D /* Supporting Files */,
@@ -269,6 +272,8 @@
 		8E9B6AB419A8520D00ED156D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8EBF31011A4E9D32003BC91E /* ETSNewWord.h */,
+				8EBF31021A4E9D32003BC91E /* ETSNewWord.m */,
 				8E92497D19BAE29600D68F2D /* ETSDBTMaster.h */,
 				8E92497E19BAE29600D68F2D /* ETSDBTMaster.m */,
 				8E92497A19BADC9600D68F2D /* ETSDBTEItems.h */,
@@ -398,9 +403,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8ECAD4C519AB2CDC00ACDAC6 /* myWords.html in Resources */,
 				8E9B6A8A19A8467600ED156D /* InfoPlist.strings in Resources */,
 				8EB925BF19C4841600C87AF5 /* LICENSE in Resources */,
+				8EBF31051A4FF38E003BC91E /* myWords.html in Resources */,
 				8E9B6A9219A8467600ED156D /* Images.xcassets in Resources */,
 				8EB925C619C488A700C87AF5 /* README.txt in Resources */,
 				8EB925C419C4841600C87AF5 /* UIAlertView-Blocks.podspec in Resources */,
@@ -434,6 +439,7 @@
 				8E0AD08519B19D1F003B051E /* ETSDBTECourses.m in Sources */,
 				8E9ABF9C19BAF37C004AF557 /* ETSComparisonViewController.m in Sources */,
 				8E9ABF9419BAF1D0004AF557 /* ETSMasterTablesViewController.m in Sources */,
+				8EBF31031A4E9D32003BC91E /* ETSNewWord.m in Sources */,
 				8E9B6AB719A8528D00ED156D /* ETSWord.m in Sources */,
 				8E9B6A9019A8467600ED156D /* ETSAppDelegate.m in Sources */,
 				8EB925C119C4841600C87AF5 /* RIButtonItem.m in Sources */,

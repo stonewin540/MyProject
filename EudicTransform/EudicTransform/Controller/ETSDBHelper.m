@@ -12,6 +12,7 @@
 #import "ETSWord.h"
 #import "ETSDBTMaster.h"
 #import "ETSDBTECourses.h"
+#import "ETSNewWord.h"
 
 @implementation ETSDBTEItems (ETSDBHelper)
 
@@ -189,6 +190,8 @@
 
 NSString *const ETSDBHelperTableItemsName = @"Items";
 NSString *const ETSDBHelperTableCoursesName = @"Courses";
+
+static NSString *const kTableItemsNameIos = @"ITEMS";
 
 static NSString *const kDBName = @"supermemo.db";
 static NSString *const kTableMaster = @"sqlite_master";
@@ -396,7 +399,7 @@ static NSString *const kTableMaster = @"sqlite_master";
     return answer;
 }
 
-- (BOOL)insertWithLastPageNum:(NSInteger)pageNum word:(ETSWord *)word;
+- (BOOL)insertWithLastPageNum:(NSInteger)pageNum word:(ETSWord *)word
 {
     NSMutableString *insert = [NSMutableString stringWithFormat:@"INSERT INTO %@ ", ETSDBHelperTableItemsName];
     
@@ -533,16 +536,57 @@ static NSString *const kTableMaster = @"sqlite_master";
     return [self execSql:[insert copy]];
 }
 
+- (BOOL)insertWithLastPageNum:(NSInteger)pageNum iosWord:(ETSNewWord *)word {
+    NSMutableString *insert = [NSMutableString stringWithFormat:@"INSERT INTO %@ ", kTableItemsNameIos];
+    
+    // keys
+    [insert appendFormat:@"("];
+    [insert appendFormat:@"CourseId, Number, "];
+    [insert appendFormat:@"MagicTree, Name, Type, "];
+    [insert appendFormat:@"Status, Disabled, Snapshot, "];
+    [insert appendFormat:@"LastRep, Lapses, Interval, "];
+    [insert appendFormat:@"Repetitions, RepetitionsCategory, AFactor, "];
+    [insert appendFormat:@"UFactor, FirstGrade, LastGrade, "];
+    [insert appendFormat:@"NormalizedGrade, EstimatedFi, ExpectedFI, "];
+    [insert appendFormat:@"Question, Answer, Command, "];
+    [insert appendFormat:@"Lessontitle, ChapterTitle, Chapter, "];
+    [insert appendFormat:@"Questionaudio, AnswerAudio, ExamPoints, "];
+    [insert appendFormat:@"OriginalNewInterval, LastModified, Frequency, "];
+    [insert appendFormat:@"PartOfSpeech, Keyword1, Keyword2, "];
+    [insert appendFormat:@"KeywordShort"];
+    [insert appendFormat:@") "];
+    
+    // values
+    [insert appendFormat:@"VALUES ("];
+    [insert appendFormat:@"5, %d, ", (pageNum + 1)];
+    [insert appendFormat:@"%d000000000000000, \"%@\", 0, ", (pageNum + 1), word.word];
+    [insert appendFormat:@"0, 0, 0, "];
+    [insert appendFormat:@"NULL, 0, 0, "];
+    [insert appendFormat:@"0, 0.0, 3.0, "];
+    [insert appendFormat:@"0.0, 6, 6, "];
+    [insert appendFormat:@"0.0, 0.0, 0.0, "];
+    [insert appendFormat:@"\"%@\", \"%@\", \"\", ", word.word, word.content];
+    [insert appendFormat:@"\"\", \"\", 0, "];
+    [insert appendFormat:@"0, 0, 0, "];
+    [insert appendFormat:@"0, NULL, 0, "];
+    [insert appendFormat:@"NULL, NULL, NULL, "];
+    [insert appendFormat:@"NULL"];
+    [insert appendFormat:@")"];
+    
+    return [self execSql:[insert copy]];
+}
+
 - (BOOL)appendWords:(NSArray *)words lastTableItem:(ETSDBTEItems *)tableItem
 {
     BOOL succeed = YES;
     
     NSInteger total = 0;
-    NSInteger pageNum = tableItem.PageNum;
+    NSInteger pageNum = 2;//tableItem.PageNum;
     NSUInteger count = [words count];
     for (NSUInteger i = 0; i < count; i++)
     {
-        if (![self insertWithLastPageNum:pageNum++ word:words[i]])
+//        if (![self insertWithLastPageNum:pageNum++ word:words[i]])
+        if (![self insertWithLastPageNum:pageNum++ iosWord:words[i]])
         {
             succeed = NO;
             break;

@@ -54,7 +54,6 @@
     
     // prepare DB
     [[ETSDBHelper sharedInstance] open];
-    [[ETSParser defaultParser] asyncLoadWords];
     
     ETSWordsListViewController *wordsController = [[ETSWordsListViewController alloc] init];
     UINavigationController *wordsNavigationController = [[UINavigationController alloc] initWithRootViewController:wordsController];
@@ -68,6 +67,15 @@
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     tabBarController.viewControllers = @[supermemoNavigationController, wordsNavigationController, comparisonNavigationController];
     self.window.rootViewController = tabBarController;
+    
+    [[ETSParser defaultParser] asyncLoadWordsWithCompletion:^(NSArray *word) {
+        NSLog(@"%d words did parsed!", word.count);
+        wordsController.words = word;
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [[ETSDBHelper sharedInstance] appendWords:word lastTableItem:nil];
+        });
+    }];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
