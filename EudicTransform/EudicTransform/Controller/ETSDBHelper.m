@@ -537,6 +537,8 @@ static NSString *const kTableMaster = @"sqlite_master";
 }
 
 - (BOOL)insertWithLastPageNum:(NSInteger)pageNum iosWord:(ETSNewWord *)word {
+    static const NSInteger kCurrentCourseId = 6;
+    
     NSMutableString *insert = [NSMutableString stringWithFormat:@"INSERT INTO %@ ", kTableItemsNameIos];
     
     // keys
@@ -558,7 +560,7 @@ static NSString *const kTableMaster = @"sqlite_master";
     
     // values
     [insert appendFormat:@"VALUES ("];
-    [insert appendFormat:@"5, %d, ", (pageNum + 1)];
+    [insert appendFormat:@"%d, %d, ", kCurrentCourseId, (pageNum + 1)];
     [insert appendFormat:@"%d000000000000000, \"%@\", 0, ", (pageNum + 1), word.word];
     [insert appendFormat:@"0, 0, 0, "];
     [insert appendFormat:@"NULL, 0, 0, "];
@@ -581,7 +583,7 @@ static NSString *const kTableMaster = @"sqlite_master";
     BOOL succeed = YES;
     
     NSInteger total = 0;
-    NSInteger pageNum = 2;//tableItem.PageNum;
+    NSInteger pageNum = 1;//tableItem.PageNum;
     NSUInteger count = [words count];
     for (NSUInteger i = 0; i < count; i++)
     {
