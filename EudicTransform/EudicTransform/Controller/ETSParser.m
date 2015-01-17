@@ -365,11 +365,20 @@
     return self.words;
 }
 
+- (NSArray *)reverseArray:(NSArray *)array {
+    NSMutableArray *reversedArray = [NSMutableArray array];
+    [array enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [reversedArray addObject:obj];
+    }];
+    return [reversedArray copy];
+}
+
 - (void)asyncWordsFromHTMLString:(NSString *)htmlString completionBlock:(void (^)(NSArray *))completion
 {
     ETSParser *__weak wself = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
         NSArray *word = [wself wordsFromHTMLString:htmlString];
+        word = [self reverseArray:word];
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(word);
         });
