@@ -22,19 +22,11 @@
 }
 
 + (CGFloat)heightOfWord:(ETSNewWord *)word {
-    static const UIEdgeInsets kInset = {10, 0, 10, 0};
-    static const CGFloat kGap = 5;
-    static UIFont *textFont;
-    if (!textFont)
-    {
-        textFont = [UIFont systemFontOfSize:17];
-    }
-    
-    CGFloat textHeight = ceilf(textFont.lineHeight);
-    CGFloat detailTextHeight = ceilf([word.content sizeWithFont:FONT_CELL_DETAILTEXTLABEL constrainedToSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds), CGFLOAT_MAX)].height);
-    CGFloat height = kInset.top + kInset.bottom + kGap;
-    height += textHeight + detailTextHeight;
-    return height;
+    // html 的高度不好计算，所以干脆显示一屏得了
+    CGFloat appHeight = [UIScreen mainScreen].bounds.size.height;
+    appHeight -= 64;// navigation bar
+    appHeight -= 44;// tab bar
+    return appHeight;
 }
 
 @end
@@ -120,14 +112,24 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static const NSInteger kTag = 15010301;
     static NSString *CellIdentifier = @"CellIdentifier";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:cell.contentView.bounds];
+        webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        webView.tag = kTag;
+        webView.scrollView.scrollEnabled = NO;
+        [cell.contentView addSubview:webView];
     }
-    [cell setWord:self.data[indexPath.row]];
+    
+    ETSNewWord *word = self.data[indexPath.row];
+    UIWebView *webView = (UIWebView *)[cell.contentView viewWithTag:kTag];
+    [webView loadHTMLString:word.content baseURL:nil];
     
     return cell;
 }

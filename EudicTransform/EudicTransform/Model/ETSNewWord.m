@@ -9,6 +9,8 @@
 #import "ETSNewWord.h"
 #import "HTMLNode.h"
 
+#define ETS_DEBUG(string, ...) NSLog(string@"\n\t%s, %s:%d", __VA_ARGS__, __func__, __FILE__, __LINE__)
+
 @implementation HTMLNode (ETSNewWord)
 
 - (NSArray *)validChildrenWithConditionHandler:(BOOL(^)(HTMLNode *child))handler {
@@ -32,6 +34,9 @@
     return [filteredChildren copy];
 }
 
+/**
+ replace the node that contains whitespace or new line
+ */
 - (NSArray *)validChildren {
     return [self validChildrenWithConditionHandler:^BOOL(HTMLNode *child) {
         NSString *rawContents = [[child rawContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -41,10 +46,34 @@
 
 @end
 
+@implementation NSString (ETSNewWord)
+
+- (NSString *)stringByReplacingOccurrencesOfPattern:(NSString *)pattern withString:(NSString *)replacement {
+    if (![pattern isKindOfClass:[NSString class]])
+    {
+        return self;
+    }
+    
+    NSError *error = nil;
+    
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive | NSRegularExpressionDotMatchesLineSeparators error:&error];
+    if (!error)
+    {
+        NSString *replaced = [regex stringByReplacingMatchesInString:self options:0 range:NSMakeRange(0, self.length) withTemplate:replacement];
+        return replaced;
+    }
+    else
+    {
+        ETS_DEBUG(@"create regex error: %@", error);
+    }
+    return nil;
+}
+
+@end
+
 @interface ETSNewWord ()
 
 @property (nonatomic, strong) HTMLNode *node;
-@property (nonatomic, strong) HTMLNode *contentNode;
 
 @end
 
@@ -60,56 +89,15 @@
         NSAssert(3 == validChildren.count, @"Please refact about index!");
         
         _serialNumber = [validChildren[0] allContents];
+        _serialNumber = [_serialNumber stringByReplacingOccurrencesOfString:@"No." withString:@""];
         _word = [validChildren[1] allContents];
-        _contentNode = validChildren[2];
-        _content = [self.contentNode rawContents];
-        
-//        NSArray *subNodes = [_contentNode validChildrenWithConditionHandler:^BOOL(HTMLNode *child) {
-//            NSString *allContents = [[child allContents] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-//            if (allContents.length > 0)
-//            {
-//                return YES;
-//            }
-//            else
-//            {
-//                NSLog(@"%@", [child rawContents]);
-//                return NO;
-//            }
-//        }];
-//        NSLog(@"%d", subNodes.count);
-//        for (HTMLNode *subnode in subNodes)
-//        {
-//            NSLog(@"%@ %@", [subnode allContents], [subnode rawContents]);
-//        }
+        _content = [validChildren[2] rawContents];
+        // replace <td class="export-td"> to <td> | <div class="exp"> to <div>
+        _content = [_content stringByReplacingOccurrencesOfPattern:@"\\ *\\w+=.*?>" withString:@">"];
+        // replace <br> | </br> to <br />
+        _content = [_content stringByReplacingOccurrencesOfPattern:@"</*br>" withString:@"<br />"];
     }
     return self;
-}
-
-- (NSString *)serialNumber {
-    NSString *serialNumber = [_serialNumber stringByReplacingOccurrencesOfString:@"No." withString:@""];
-    return serialNumber;
-}
-
-- (NSString *)content {
-//    NSString *content = [_content stringByReplacingOccurrencesOfString:@"\"" withString:@"'"];
-//    return content;
-    {
-        NSString *content = nil;
-        NSError *error = nil;
-        NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"\\ *\\w+=.*?>" options:NSRegularExpressionCaseInsensitive|NSRegularExpressionDotMatchesLineSeparators error:&error];
-        if (nil != error)
-        {
-            NSLog(@"%s create regex error:\n\t%@", __func__, error);
-        }
-        else
-        {
-            content = [regex stringByReplacingMatchesInString:_content options:0 range:NSMakeRange(0, _content.length) withTemplate:@">"];
-            
-            regex = [NSRegularExpression regularExpressionWithPattern:@"</*br>" options:NSRegularExpressionDotMatchesLineSeparators|NSRegularExpressionCaseInsensitive error:&error];
-            content = [regex stringByReplacingMatchesInString:content options:0 range:NSMakeRange(0, content.length) withTemplate:@""];
-        }
-        return content;
-    }
 }
 
 - (NSString *)description {

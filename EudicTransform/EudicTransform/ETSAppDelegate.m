@@ -65,16 +65,16 @@
     UINavigationController *comparisonNavigationController = [[UINavigationController alloc] initWithRootViewController:comparisonController];
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    tabBarController.viewControllers = @[supermemoNavigationController, wordsNavigationController, comparisonNavigationController];
+    tabBarController.viewControllers = @[wordsNavigationController, supermemoNavigationController, comparisonNavigationController];
     self.window.rootViewController = tabBarController;
     
     [[ETSParser defaultParser] asyncLoadWordsWithCompletion:^(NSArray *word) {
         NSLog(@"%d words did parsed!", word.count);
         wordsController.words = word;
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
-            [[ETSDBHelper sharedInstance] appendWords:word lastTableItem:nil];
-        });
+//        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+//            [[ETSDBHelper sharedInstance] appendWords:word lastTableItem:nil];
+//        });
     }];
     
     self.window.backgroundColor = [UIColor whiteColor];
